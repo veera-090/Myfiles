@@ -1,0 +1,1606 @@
+										Linux Architecture:
+										==================
+
+#subscription management:
+subscription-manager status
+subscription-manager register		--> username:veeramohanreddy	password:Redhat@123
+subscription-manager subscribega
+subscription-manager auto-attach
+subscription-manager status
+
+
+
+
+
+utilities/commands/Applications						
+shell --> user interacts with hardware
+kernel --> hardware management
+hardware
+
+
+#JIRA:
+Jira tool is launched by atlassian team.
+Jira software is used for Bug tracking, issue tracking, Team management and Project management
+
+#Uses of JIRA?
+Requirement Document & Test case management
+JIRA for agile teams
+software development teams
+bug tracking
+Project management
+
+#who uses JIRA?
+
+Companies and teams
+DevOps team
+Software development teams
+Project management teams
+
+#directory structure:
+-------------------
+windows:	c:/ my documents
+				picture
+				downloads
+				desktop
+			D:/
+			E:/
+			
+Linux:		
+		/---/home -->	home directory of the user
+		
+						linux server --> in a data center
+						user1 --> /home/user1
+						user2 --> /home/user2
+						
+			/var -->	log files	i.e. it stores information related to applications 
+						
+						debugging
+						ansible - /var/log/ansible.log
+						/var/log/messages	--> os related debug information
+						
+			/etc -->	stores the configuration files
+			
+						/etc/puppet/conf	--> configuration file for puppet
+						
+			/tmp -->	stores the temporary files
+			/opt -->	stores 3rd party softwares
+			/root -->	home directory of root 		i.e. Administrator / highest privilages 
+			/bin -->	stores binary files
+			/lib -->	stores library files
+			/dev -->	external hard drives
+						/dev/sda
+						/dev/sbb
+						
+						
+#login protocols:
+---------------
+
+putty -->	To login remote machine	(windows-linux)
+ssh/telnet
+IP address or hostname
+
+server1.in.ibm.com --> hostname
+9.100.10.10 --> IP address
+
+
+
+#commands:
+--------
+
+ifconfig --> IP address
+
+ls --> list of files
+
+ls -l --> long list
+
+ls -ltr --> long list reverse time stamp
+
+ls -l / --> directory structure
+
+mkdir <dir name> --> to create directory
+
+pwd --> present working directory
+
+cd <dir name> --> change directory
+
+mkdir -p </dir name1/dir name2/dir name3> --> to create multiple directories
+
+touch <file name> --> to create files
+
+rm <file name> --> to delete/remove file
+
+rmdir <dir name> --> to delete/remove only empty directory
+
+rm -rf <dir name> --> to delete/remove directory
+	r --> recursively
+	f --> forcibily
+	
+cp <file name1> <file name2> --> copy file
+
+cat <file name> --> To listout the content
+
+cd .. --> one level up
+
+cd ../../ --> two level up
+
+cd - --> go back to previous directory
+
+---------------------------------------
+
+d --> directory
+- --> file
+l --> link
+
+directory/file/link					- 1
+permissions - read/write/execute	- 2
+no.of files in dir					- 3
+user id								- 4
+group id							- 5
+size of file/dir					- 6
+date								- 7
+file name							- 8
+
+
+read    - r	- 4
+write   - w - 2
+execute - x - 1
+
+u - owner/ current user --> dev1, dev2
+g - group 				--> dev
+o - others				--> test1, build, prod
+
+rwx r-x r--
+
+u - owner	dev1	--> rwx 	7
+g - group	dev2	--> r-x		5
+o - others	test1	--> r--		4
+
+rwx r-x r--
+
+chmod --> change mode 
+
+chmod u+rwx, g+rwx, o+rwx <file name>	--> giving all permissions
+
+chmod u+rwx, g-w, o-wx <file name> 	
+
+chmod 777 <file name>	==> rwx rwx rwx
+
+chmod 754 <file name>	==> rwx r-x r--
+
+chmod 744 <file name>	==> rwx r-- r--
+
+id / whoami	-->	check what is the current user
+
+cat /etc/*release	--> check version
+
+
+
+#protocols to login to a machines:
+--------------------------------
+telnet ==> 23 port
+ssh    ==> 22 port
+
+
+daemon:		process running on the background is called "daemon".
+process:	program under execution is called "Process".
+program:	
+
+ssh/telnet	--> 24/7 - 365days in background called "daemon".
+
+ssh	--> encrypted
+telnet --> root/root123
+
+
+
+ps	--> To listout the process
+
+ps -ef --> To listout the process running on the machine
+
+head -10 <filename>	--> display first 10 lines of the command
+
+tail -10 <filename>	--> display last 10 lines of the command
+
+#pipe operator: ( | ):
+--------------------
+
+command 1 (output is) --> | command 2 (input)		==> (command 1 output is --> input to command 2)
+
+wc 	  --> word count
+wc -l --> line numbers
+wc -c --> character number
+wc -w --> word number
+
+head -60 | tail -20	--> display 40-60 lines
+
+grep	--> search particular word/pattern		i.e. global regular expression print	| grep is case-sensitive | To ignore case-sensitive we use -i
+
+cat <filename> | grep <word name/filename>	--> search particular word/pattern
+
+cat <filename> | grep -i <word name/filename>	--> To ignore case-sensitive we use -i
+
+grep -i	--> ignore the case-sensitive
+grep -w	--> search the word
+grep -n	--> line number along with search
+grep -A<2> <word name/filename>	--> print n number of lines after occurance
+grep -B<3> <word name/filename>	--> print n number of lines before occurance
+
+tail -f /var/log/messages	--> dynamically we can see the log files	| ctrl + c --> to exit
+
+tail -f <file name>	--> dynamically we can see the content of any file
+
+
+vi editor:
+==========
+vi 
+vim	--> improved version of vi
+nano
+
+esc mode 	--> i 	--> insert mode
+insert mode --> esc --> escape mode
+
+esc dd	---> Delete the line
+esc yy	---> Copy the line
+esc p	---> Paste the line
+esc i	---> To insert content 
+esc u 	---> To modify the content back to original
+:w		---> To save
+:wq		---> To Save and Quit
+:q!		---> To Quit without save
+:q		---> To quit
+nyy		---> will copy n no.of lines 
+ndd		---> will cut n no.of lines
+p 		---> paste
+
+/<word/pattern>	--> search at word/pattern in vi-editor
+
+
+#multiple files:
+--------------
+
+vim -o <file1> <file2>	--> will open 2 files vertically	| ctrl + w --> curser switch between the files
+vim -o <file1> <file2>	--> will open 2 files horizontally	| ctrl + w --> curser switch between the files
+
+
+
+
+#Package installation:
+--------------------
+
+windows	--> .exe
+linux	-->	?
+
+redhat/suse/fedora/centos	--> rpm	 --> .rpm	
+ubuntu						--> dpkg --> .dpkg		| dpkg --> debian package 
+
+
+#How to use Package management?
+-----------------------------
+
+rpm -ivh chef.rmp	--> install chef		| -i = install; v = verbose -->(messages shown on screen); h = hashes -->(percentages of completion ####)
+rpm -qa	--> list all the packages			| -qa = query all -->(display all the packages)
+rpm -e chef	-->	delete/remove package		| -e = erase the packages -->(remove all the packages)
+
+dpkg -i chef.deb	--> install chef
+dpkg -l	--> list all the packages
+dpkg -r chef	--> delete/remove packages
+
+
+
+man <command name>	--> show the usage of the command
+
+rpm --help	--> To check syntax
+
+uname -na	--> To know hardware architecture
+
+wget url	--> To download the package from internet through url
+
+winscp	--> To copy files from windows-linux or vice-versa
+
+
+#How to transfer files from one machine to another machine?
+
+ftp	--> file transfer protocol 	
+scp	--> secure copy protocol 
+
+
+scp <dir name/filename> <target-server2 ec2-user@IP Address>:/<dir name>	--> To copy files from current server1 to another server2(ec2-user)
+
+scp <source-server2 ec2-user@IP address>:/<dir name/filename> <current server target dir name>	--> To copy files from another server2(ec2-user) to current server1
+
+/etc/ssh/sshd_config	--> edit: permit-rootLogin - yes
+
+service ssh restart	--> restart the ssh
+
+hostname --> To check the system name	| server1.us.ibm.com	| server1.in.ibm.com
+
+cat /etc/passwd	--> how many users created & how many users are there
+
+man useradd	--> useradd help
+
+passwd username	--> create password for new user
+
+cat /etc/shadow	--> user password related info
+
+useradd username (or) adduser username
+
+useradd -d /home/veera -s "/bin/bash" -c "comment" -m veera	
+
+useradd
+				-d home directory
+				-s shell
+				-c comment
+				-m username
+
+ec2-user:x:1000:1000:Cloud User:/home/ec2-user:/bin/bash
+
+ec2-user		- username
+x				- password related info
+1000:			- UID (user identification number)
+					1. root user	- 0					--> Root user will create at the time of OS installation
+					2. system user	- (1-999)			--> system user will create at the time of sevice installation (package/software installation)
+					3. local user	- (1000-65534)		--> local user - create by Admin/Root
+
+1000:	 		- group ID
+Cloud User:		- comment 
+/home/ec2-user:	- home directory
+/bin/bash		- shell
+
+
+
+sudo su	-	| sudo -i -->	To switch to root 
+
+su - username -->	To switch to that username
+
+passwd username	--> create password for new user
+
+ssh -l <username> <ec2-user@IP Address>	--> To login to other machine
+
+hostname	--> To check the system name
+				server1.us.ibm.com	--> FQDN - Fully Qualified Domain Name
+
+ping 10.10.1.12 | ping <remote IP Address>	--> To check whether the remote machine is alive or not 
+
+ping -c2 10.0.1.12	| ping -c2 <remote IP Address>	--> if we want to ping two iterations. use  -c2
+
+netstat -na	--> To listout the ports on which applications listening
+
+	Jenkins	--> 8080
+	Nexus	--> 8081
+
+traceroute <IP address>	--> It shows in which direction the packet flows exactly
+
+top --> To findout the CPU utilization on a machine		| ctrl + q	--> to comeout from top
+
+
+
+
+#Extension of packages:
+=====================
+
+[Packagename -version hardwareArchitecture.extension]
+
+chef -12.1.x86_64.rpm	-->	RHEL
+chef -12.1.x86_64.deb	-->	ubuntu
+
+#Package Installation:
+====================
+
+[packagetype -ivh packagename.extension]
+
+rpm -ivh chef.rpm	--> RHEL
+rpm -qa	--> To list all packages
+rpm -e -->	To remove/Delete packages
+
+dpkg -i chef.deb	--> Ubuntu
+dpkg -l --> To list 
+dpkg -r -->	To remove/Delete packages
+			
+				chef --> depends on -->> Ruby
+					
+					rpm -ivh ruby.rpm
+					rpm -ivh chef.rpm
+																	abc --> depends --> xyz
+					abc --> def -->	xyz								abc	--> 1 --> xyz
+					rpm -ivh xyz.rpm									 --> 2 --> klm
+					rpm -ivh def.rpm									
+					rpm -ivh abc.rpm								|		rpm -ivh xyz.rpm
+																			rpm -ivh 1.rpm
+																			rpm -ivh klm.rpm
+																			rpm -ivh 2.rpm
+																			rpm -ivh abc.rpm
+
+#Tools to install the packages/dependencies:
+==========================================
+
+centos/redhat/fedora	--> yum
+Ubuntu	-->	apt-get
+
+yum install chef	--> depends on --> 100 packages					[yum install packagename]
+apt-get install chef												[apt-get install packagename]
+
+
+server1	---------------->	yum install -y chef
+			-->downloads --> installs
+			
+			
+#repository configuration:
+------------------------
+
+rhel/centos/fedora	-->	/etc/yum.repos.d/
+Ubuntu				-->	/etc/apt/sources.list
+
+iso --> installation media
+
+net-tools	--> it has binary configurations like ifconfig, binaries
+
+apt-get install ansible --> Install ansible
+
+apt-get remove ansible	--> remove/Delete anisble
+
+centos/redhat/fedora	-->	epel repository
+							extra packages enterprize linux
+							
+[epel.repo] ==> Centralize packages for centos/redhat/fedora
+
+yum install epel-release
+
+yum repolist
+
+
+
+#shell properties:
+----------------
+
+	ctrl + A -->	curser go to begining
+	ctrl + E -->	curser go to end
+	ctrl + W -->	To remove a word
+	ctrl + u -->	To clear the line
+	ctrl + R -->	reverse search
+	tab -->	Auto fill
+
+
+
+#scenario:
+--------
+
+1) 100 machines log files share to central server?
+
+	configure nfs server and mount nfs server to all 100 machines
+
+2) 100 servers
+	1nfs server
+	to all 100 servers mount to nfs server
+	
+	
+mount	--> To attach the file
+
+umount	-->	To detach
+
+mount <nfsserverIP Address/hostname>:/b /a							[mount nfs IPaddress/hostname: /nfs server /local directory]
+
+/a -->	local directory
+/b -->	nfs server directory
+
+nfs server 
+
+nfs: Network File Sharing
+
+df -h	we can check where the file system is stored (or) list all the detials
+
+
+
+
+#nfs server configuration:
+------------------------
+on server:
+	1) 	yum install nfs*	--> Redhat/fedora/centos
+		apt-get install nfs*	--> Ubuntu
+		service nfs start	--> start the nfs server
+		service nfs status	--> To check the nfs server status
+		
+	2) 	create a directory, share the directory
+		mkdir <dir name>	| mkdir /a
+		
+		To make temporary:
+			/etc/exports	| vi /etc/exports	--> inside --> give < nfs server dir name with ro/r/w permissions>	| Temporary
+		To make permanent:
+			/etc/fstab		| vi /etc/fstab		--> To place the directory permanently								| Permanent
+		
+		/a ro *				| ro = readonly; r/w = read/write;	* = to all the machines
+		exportfs -a		 
+		exportfs		-->	show the shared directories
+		
+onclinet:
+	mkdir <dir name>		| mkdir /b
+	mount 10.0.1.16:/a /b	| mount nfs serverIP address:/<nfs server dir name> /<client dir name>
+	
+
+export PS1=<naming of the machine#/$>	--> change the name of the server
+
+showmount -e <IP address>	--> with the help of IP address we can findout which directory is shared
+
+mount <IP address>	--> To attach the file/dir
+
+umount <dir name>	--> To detach/remove file/dir
+
+df -h	we can check where the file system is stored (or) list all the detials
+
+NAT	--> Network Address Translation	(Private IP)
+
+#laptop --> bridged adaptor	==> oracle virtual box --> networ settings --> bridge adaptor
+
+
+
+#Shell Scripting:
+---------------
+
+sample.sh	--> shell script
+sample.py	--> python script
+sample.rb	--> ruby script
+sample.c	--> c program
+sample.cpp	--> c plus plus
+sample.java	--> java 
+
+./sample.sh	--> To execute
+
+compiler	--> entire program executes at once
+interpreter	--> program executes line by line
+
+
+which bash/ls/rpm/ifconfig/
+`expr`	--> expression to write arithmatic operations
+
+$	--> argument in shell script
+$*	--> will give all the arguments (or)	will show all execution of arguments
+$#	--> will give/count the no.of arguments 
+$$	--> PID = process ID
+$@	--> will give/count the no.of arguments 
+$0	--> file name
+$?	--> return code of a command or script
+0	--> passed
+other than 0 --> failed
+set -x | bash -vx <file name.sh>	--> to debug shell script (or)	will show the code execution step by step
+
+
+
+
+#Take input from user:
+--------------------
+1) Interactive way:
+		echo " "	--> printf
+		read a		--> scanf
+		`expr`		--> expression to write arithmatic operations
+		echo $variable name
+		
+2) Non-interactive way:
+		./sample.sh 1 2 3
+		
+
+#Loops:
+-----
+#if
+while
+for
+
+
+#if Loop syntax:
+---------------
+if [ condition ]							|	if [ $# -gt 2 ]
+then											then
+-- statements --								sum=`expr $a + $b`
+----------------								echo $sum
+else											else
+-- statements --								echo "please enter valid no.of arguments"
+----------------								exit1;
+fi												fi
+
+
+#while Loop syntax:
+------------------
+initialization;									i=0
+while [ condition ]							|	while [ i -lt 10 ]
+do												do
+-- statements --								echo $i
+----------------								----
+increment/decrement							 	i=`expr $i+1`
+done											done
+
+
+#for Loop syntax:
+----------------
+for i in 1 2 3 4
+do
+echo $i
+done
+
+
+
+-gt	--> greater than
+-ge	--> greater then or equal
+-lt	--> less than
+-le	--> less than or equal
+-eq	--> equal to 
+-ne	--> not equal to
+
+
+#redirection operators:
+----------------------
+>	--> overwrite if file exist already
+>>	--> append operator
+
+ls -lrt > file	==> ls -lrt output is redirected to file
+
+/dev/null	--> we can redirect whatever we want but it cannot store.
+
+ls -lrt > /dev/null	--> if any error it will through on console
+
+ls -lrt 2> /dev/null	--> redirects error
+
+
+
+#Functions:
+----------
+reusablility
+modularity
+
+#syntax:
+
+defining:								function mul()
+function function_name() 				{
+{										a=$1;
+-- statements --						b=$2;
+----------------						sum=`expr $a \* $b`;
+}										echo $sum;
+calling:								}
+function_name							mul 10 20;
+
+
+#case statement:
+---------------
+
+echo "Enter your choice"
+		1. addition
+		2. substraction
+		3. multiplication
+		4. division
+	read n;
+	
+case $n in
+1) echo "Enter two number"
+   read a b
+   add $a $b;;
+   
+2) echo "Enter two number"
+   read a b
+   sub $a $b;;
+
+3) echo "Enter two number"
+   read a b
+   mul $a $b;;
+
+4) echo "Enter two number"
+   read a b
+   div $a $b;;
+*) echo "Please enter valid input"
+   exit1;;
+esac
+
+
+
+sed (stream line editor):
+------------------------
+sed will only display the content on the screen, but not actually change inside the script defualt
+
+sed 's/abc/888/1' <filename>	| s = substitute; abc = pattern change to 888; 1 = occurance;			| to find and replace from pattern/script
+
+sed -i 's/abc/888/1' <filename>	--> Modify the occurance/content inside the script also
+
+sed -i 's/abc/888/g' <filename>	--> Modify the content globally											| g = global
+
+sed 2d <filename>	--> To delete/remove particular 2nd line using sed
+
+sed nd <filename>	--> To delete/remove nth line
+
+
+
+
+awk	--> extracts the rows or columns from output
+
+utility
+	names --> A W K	
+
+It is a programming language
+
+ls -lrt | awk {'print $9'}	--> it extracts 9th column from ls -lrt output
+
+ls -lrt | awk {'print $5 "\t" $9'}	--> extract filesize and filename									| $5 = filesize; $9 = filename
+
+ls -lrt | awk 'FNR==1 {print}'	--> extract 1st rows													| FNR==1 is extract row
+
+var=`ls`	--> Assign output to variable inside script
+
+
+
+#regular expressions:
+--------------------
+
+*	--> match 0 or more occurances		| ls -lrt /etc/*release		i.e. wild characters/meta characters
+^	--> carrot / begining of line		| ls -lrt | grep ^-			i.e. shows all the files
+$	--> ending 							| ls -lrt | grep sh$		i.e. shows all the sh
+?	--> single character				| ls -lrt /etc/?release		
+
+
+
+
+#boot process:
+-------------
+
+1. post	--> power on self test			i.e. mouse,keyboard is working or not
+
+2. bios	--> basic io system				i.e. system settings like virtualization enable
+
+3. mbr	--> master boot record			i.e. first program, what is the hard disk and from where to boot the system
+
+4. boot loader	--> 					i.e. OS selection & configuration file
+
+5. kernel	-->							i.e. Memory & Process Management
+
+6. /etc/inittab	--> 					i.e. PID (process ID) --> init	--> reboot the machine 
+
+run level	--> default --> run level is 5
+
+
+
+
+#Vagrant:
+========
+vagrant init <vagrantbox name>
+
+edit --> Vagrantfile	| config.vm.box = "generic/rhel8"
+
+vagrant plugin install vagrant-vbguest	--> install vagrant packages
+
+vagrant up				| create VM at 1st--> time | VM up at 2nd--> time
+
+vagrant ssh
+
+config.vm.network "public_network"	--> uncomment
+
+vagrant reload	--> reload if any changes do means
+
+ifconfig	--> check IP address
+
+vi /etc/ssh/sshd_config	--> edit: passwwordAuthentication: yes 
+
+service ssh restart	 --> ubuntu
+service sshd restart --> redhat/fedora/centos
+
+vagrant halt/suspend	--> stop the machine
+vagrant destroy --> Terminate the machine
+user name: vagrant
+password: vagrant
+
+
+
+
+
+#ANSIBLE:
+========
+ansible:	https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
+
+
+#Configuration Management tools/Continuous deployment tools:
+
+adding a user
+updating a configure file
+applying patch
+installing rpm
+configure mysql/java/php
+By default ansible execution is #"parallel".
+
+
+
+
+#Tools:
+------
+Chef		- cookbooks
+Ansible		- playbooks
+Puppet		 
+Saltstack	
+udeploy
+
+
+1. ansible master	--> server		--> install at master
+   ansible agents	--> clients		--> #agentless
+
+2. push mechanism	--> write some scripts on master 
+		It pushes changes to agents
+
+3. playbooks	--> To automate the #scripts --> YAML
+   YAML - Yet Another Markup Language	--> syntax is based on YAML
+   
+4. ansible is written in #"python".
+	
+open source	--> 100 nodes
+enterprise	--> morethan 100 nodes	(anisble tower)
+
+
+
+#ansible installation & setup:
+----------------------------
+1. install anisble on master
+2. enable passwordless authentication between master and agent (client)
+3. add agents/clients to master at inventory file
+4. write scripts/playbooks to automate tasks
+
+
+#To configure as a master, we need to enable repository
+
+redhat --> cat /etc/yum.repos.d/
+ubuntu --> cat /etc/apt/sources.list
+
+centos/redhat/fedora	-->	epel repository
+							extra packages for enterprise linux
+							
+epel.repo ==> Centralize packages for centos/redhat/fedora
+
+By default ansible execution is #"parallel".
+
+
+
+#steps:
+------
+#How to install ansible and connect to remote machine?
+
+yum install ansible		--> redhat
+
+apt-get install ansible	--> ubuntu
+
+ssh -l root 10.0.1.142		--> ssh -l <username> <ec2-user@IP Address>	--> #To login to other machine 
+
+ssh -l root 10.0.1.142 "ls"
+
+
+#How to set passwordless authentication?
+
+ssh-keygen	--> #To generate ssh keys		enter-enter-enter
+
+cd /root/.ssh	--> where ssh keys generate
+
+ssh-copy-id -i /root/.ssh/id_rsa.pub <root@client private IP address>  
+
+
+#How to add agents/clients IP address in master?		| How to check where is the ansible on a machine?
+
+cd /etc/ansible/hosts
+
+hosts (ansible inventory file) --> edit
+
+vim hosts --> 
+			ec2-user@Private IP address
+			ubuntu@Private IP address
+
+• Inventory file has information about the agents/clients and master manages this inventory file
+
+#How to give ansible host ping command?
+
+ping agent/client/ubuntu/ec2-user
+
+ansible Linux/ubuntu -m ping
+
+
+
+ssh -l root 10.0.1.142 "ls"		--> what happened internally means
+
+/root/.ssh/authorized_keys		--> authorized_keys added at client/agent/ubuntu/ec2-user if we open #"authorized_keys" --> master key is there
+
+ssh -l root 10.0.1.142 "ifconfig -a"	--> To see the IP address of agent/client
+
+
+
+#---------------------------------------------------
+
+#How to install ansible in Ubuntu?
+sudo apt update
+sudo apt install ansible
+ansible –version
+
+#How to create keys in Linux?
+ssh-keygen
+
+#How to connect to other Linux servers?
+ssh –i <pem file path> <Ubuntu/ec2-user@private IP address>
+
+#How to make password less connection while connecting to Linux servers?
+copy the ssh-keygen keys from master to the agent/client server 
+cat /root/.ssh/id_rsa.pub | ssh –i <pem file path> <Ubuntu/ec2-user@private IP address> “cat >> ~/.ssh/authorized_keys”
+
+
+#How to add agents/clients IP address in master?		| How to check where is the ansible on a machine?
+cd /etc/ansible
+hosts (ansible inventory file)	--> edit
+vim hosts --> 
+			ec2-user@Private IP address
+			ubuntu@Private IP address
+• Inventory file has information about the agents/clients and master manages this inventory file
+
+#How to give ansible host ping command?
+ansible all –m ping
+ansible Linux/ubuntu -m ping
+
+#---------------------------------------------
+
+
+ansible galaxy	--> repository of modules
+
+
+#how to download and install ansible galaxy?
+ansible-galaxy install <role name>
+
+
+#syntax of inventory file:
+[webservers]
+agent or 10.0.1.142
+
+
+100 servers
+30 webservers			--> apache, tomcat
+30 database servers		--> mysql
+30 app servers			--> applications
+10 monitoring servers	--> nagios
+
+#ping is successful or not?
+ansible all -m ping	--> To see what all machines are available at ansible inventory file
+ansible webservers -m ping	-->	-m = module
+anisble all -m command -a "touch /tmp/<create filname>"	--> To create file at agent from master		#command -a is module to execute any command on agent
+
+
+
+#steps of ssh:
+-------------
+
+sudo -i --> Login as root on both master & agent
+install ssh
+start ssh/sshd
+vi /etc/ssh/sshd_config	--> enable --> #permitRootLogin: yes	--> at agent
+service ssh restart	--> at agent	#ubuntu 
+service sshd restart --> at agent	#centos
+install ansible software
+ssh-keygen	--> generate ssh keys at both master & agent
+vi /etc/ansible/hosts	-->	#give IP address/name of angent --> master
+ssh-copy-id -i /root/.ssh/id_rsa.pub root@agent		--> agentIP address/name		--> master
+ssh -l root agent	--> master
+ansible all -m ping	--> ping all the machines
+
+
+#creating Playbooks: --> master
+cd /etc/ansible
+mkdir playbooks	-->
+vi sample.yml	--> create sample yml file --> --- #syntax
+
+
+#---------------
+#YAML script:
+---
+- hosts: webservers						
+  tasks:
+  - name: install http package on agent1							
+	yum: name=httpd state=installed								| yum/service = module
+
+
+#How to call/execute playbooks?
+ansible-playbook sample.yml
+
+
+
+#How to deploy a webserver to agents?
+#steps:
+install the httpd package
+start the service
+copy the configuration file	template --> #text file
+copy some image						 --> #Non-text file
+
+
+#------------------
+#deploy webserver at agent script:
+---
+- hosts: webservers
+  tasks:
+  - name: install http package on agent1
+    yum: name=httpd state=installed
+  - name: start the service on agent 
+    service: name=httpd state=started
+  - name: copy the template
+    template: src=/etc/ansible/playbooks/<textfilename.html> dest=/var/www/html/<textfilename.html>
+  - name: copy the image
+    copy: src=/etc/ansible/playbooks/<imagefilename.png/jpeg> dest=/var/www/html/<imagefilename.png/jpeg>
+
+
+#-------------------
+#deploy webserer at agent script based on user input?
+---
+- hosts: webservers
+  vars_prompt:
+  - name: pkgtoinstall
+    prompt: Install which package?
+    default: telnet
+  tasks:
+  - name: ensure apache is installed
+    yum: pkg={{pkgtoinstall}} state=latest
+
+
+
+#how to call/execute interactive script in ansible?
+ansible-playbook interactive.yml 
+
+
+
+#How to check service is running or not at agent?
+service httpd status
+
+#how to start the server?
+service httpd start
+
+
+
+#what is gathering facts in ansible?
+facts   --> component of ansible
+			gathers information of agent		| CPU, RAM, OS, OS version, file system
+			information interms key value pair
+
+
+gather_facts: yes	#default	--> if we don't want to gather agent information then give :no  
+
+
+#how to get facts about agent?
+ansible webservers -m setup --tree /tmp/facts
+
+#which module we use to listout all the facts?
+setup module	--> ansible webservers -m setup --tree /tmp/facts
+
+
+
+#scenario on tags:
+program of 100 lines
+multiple tasks --> a part of it --> execute 10 program lines how?	--> #tags
+
+playbook
+task1
+		-tag1
+taks2		
+
+		-tag2	
+task3
+		-tag3
+
+
+
+#loop through all the packages --> with_items
+want to install 100 packages	--> #with_items
+
+with_items:
+	package1
+	package2
+	package3
+
+
+
+
+#modules:
+command: --> To execute any command 
+shell:	 --> setting environment variables	
+raw:	 --> redirection	| ls -lrt > file
+
+
+
+
+
+#--------------
+#tags and with_items script:
+---
+- hosts: webservers
+  tasks:
+  - name: install the logwatch and https packages
+    yum: pkg={{ item }} state=latest
+	with_items:
+	- logwatch
+	- httpd
+	- tigervnc-server
+    tags:
+	- packages/<package1>
+
+  - name:verify if http is installed
+    raw: yum list installed | grep http > /tmp/pkg.log						| raw --> redirect,	http > /tmp/pkg.log
+	tags:
+	- verfication/<package2>
+
+
+
+
+#how to call/execute tags script in ansible?
+ansible-playbook tags.yaml --tags <package1/2/name>
+
+
+#Parallel execution:
+By default ansible execution is #"parallel"
+serial:1	--> on each  machine execute serailly
+
+
+#scenario:
+4 hosts
+serial:1	--> execute one by one machine
+
+
+6 hosts
+serial:2	--> executes two machines at one time
+
+
+
+
+#how to enable debug while executing the playbook?
+ansible-playbook -v <filename.yaml>		--> start level
+ansible-playbook -vv <filename.yaml>	--> medium level
+ansible-playbook -vvv <filename.yaml>	--> most high level
+
+
+
+#how to execute playbook on different distribution servers/agents?
+#how to execute generic scripts on different distribution servers/agents?
+
+when	--> #we use when module 
+	
+
+
+#when script:
+---
+- hosts: webservers
+  tasks:
+  - name: install httpd on redhat/centos
+    yum: name=httpd state=installed
+	when: ansible_os_family == "RedHat"
+  - name: install httpd
+    apt: name=apache2 state=installed
+    when: ansible_os_family == "Debain"	
+
+
+
+
+include	--> #include is just like a function, for reusablility
+
+
+#include script:
+---
+- hosts: webservers
+  tasks:
+  - include: /etc/ansible/tasks/file.yml
+
+
+#file.yml
+---
+- hosts: webservers
+  tasks:
+  - name: create a dump file for common role
+    file: name=/tmp/dummy state=touch
+
+
+
+
+
+#how to get facts about agent?
+ansible webservers -m setup --tree /tmp/facts	--> ansible facts
+
+
+#which module we use to listout all the facts?
+setup module	--> ansible webservers -m setup --tree /tmp/facts
+
+
+#Ansible-vault:
+--------------
+
+#how to restrict people to see/execute the playbook?
+ansible-vault	--> encrypts the playbook with password
+
+
+#how to encrypt & decrypt ansible script file?
+ansible-vault encrypt <filename.yml>	--> #To encrypt
+create password
+ansible-vault decrypt <filename.yml>	--> #To decrypt
+
+
+#how to execute encrypted ansible script file?
+ansible-playbook <filename.yml> --ask-valut-pass	--> #To execute
+
+
+#scenario:
+---------
+100 servers
+30 webservers			--> httpd, apache, tomcat	--> http.yml
+30 database servers		--> mysql					--> mysql.yml
+30 application servers	--> applications			--> xyz.yml
+10 monitoring servers	--> nagios					--> monitor.yml
+
+
+
+#webservers:
+
+httpd/apache/tomcat		--> install
+configure
+start the server
+copy the template		
+copy the some images		
+copy some files			--> jar, war, ear files
+
+To perform webservers	--> playbook 	--> http.yml
+
+
+#database servers:
+playbook	--> mysql.yml
+configure
+create users & password
+
+
+#application server:
+playbook	--> xyz.yml
+install applications
+configure
+perform some steps
+
+
+#how to create/arrange infrastructure in an organisation?
+#how to arrange playbooks?
+
+when start machine common tasks to perform		--> install ssh, python...etc
+
+1. webservers:
+				install ssh
+				configure ssh
+				install python
+				http.yml code
+
+
+#Ansible Roles:
+------------
+webserver --> role --> perform common tasks --> ssh, http install, configure
+			/etc/ansible/playbook/role1.yml
+								hosts: webservers
+								role:role1
+								
+			/etc/ansible/roles/role1/vars/main.yml			--> http_port=8080
+									/default/main.yml
+									/main/task.yml			--> {{http_port}}
+									/templates/index.html
+									/files/cloud.png
+
+
+
+
+
+#for --> with_items
+#if  --> when
+
+
+main/task.yml	--> execution starts
+
+
+#create a user on all agents:
+home directory
+user name
+group name
+password
+comment
+shell
+
+---
+- hosts: webservers
+  tasks:
+  - name: create a user on agent
+    user:
+	  name: user1
+	  comment: "user1 comment"
+	  uid: 1040
+	  groups: admin, root
+	  passwd: ZXCFGYHUI
+	  shell: "/bin/bash"
+
+
+openssl passwd	--> To generate encrypted password for a user
+
+
+#handlers:
+handlers	--> will executes only if there is changes in content
+output is same
+
+
+#scenario:
+http
+httpd
+template
+restart
+
+1st --> once process is restarted
+2nd --> no need --> we use #handlers
+
+
+#handlers script:
+---
+- hosts: webservers
+  tasks:
+  - name: install http package on agent1
+	yum: name=httpd state=installed	
+  - name: start the service on the agent
+    service: name=httpd state=started
+  - name: copy the template
+    template: src=/etc/ansible/playboos/index.html dest=/var/www/html/index.html
+	notify:
+	- restart httpd
+  handlers:
+  - name: restart httpd
+    service: name=httpd state=restarted
+	
+	
+#idempotency:
+output is same
+idempotency	--> if we execute ansible-playbook no.of times, end result will be same. except if any changes at facts 
+
+
+#scenario:
+upgrading the database
+100 agents	--> 1 database
+
+running playbook to update the database
+	100 times to update the database -- ??
+
+
+#run_once:
+run_once: true	-->	It will be executed only once		#run once per playbook
+
+
+#run_once script:
+---
+- hosts: webservers
+  tasks:
+  - name: create dummy file
+    command: touch /tmp/dummy1.txt
+	run_once: true
+
+
+
+#Roles:
+------
+#scenario:
+100 --> servers
+30  --> webservers
+30  --> database servers
+30  --> application servers
+10  --> monitoring servers
+
+
+#Roles:
+
+#how to use the roles?
+
+cd /etc/ansible/playbooks	--> abc.yml
+
+abc.yml		-->	webservers
+pqr.yml		-->	database servers
+xyz.yml		-->	application servers
+
+---
+- hosts: webservers
+  roles:
+  - role123(common Tasks)	--> ssh, create user, password, configurations
+  - role456(actual role)	--> httpd; copy website date; copy jar,war,ear files; restart the process
+
+
+	cd /etc/ansible/roles/role123	--> dir
+								/tasks/main.yml
+								/vars
+								/defaults
+								/templates
+								/files
+	
+	cd /etc/ansible/roles/role456	--> dir
+								/tasks/main.yml
+								/vars
+								/defaults
+								/templates
+								/files
+
+
+
+#variable precedence:
+playbooks	--> highest precedence over -->#vars & #defaults  
+vars --> has highest precedence over    -->#defaults
+defaults	--> last/low precedence
+
+
+ntp- network time protocol
+
+
+#what do we do if we want to tryout the role?
+--> visit ansible.galaxy.com
+--> go through the readme -- on which platforms it supported
+--> ansible-galaxy install <role name>	--> download ansible role	#path: /etc/ansible/roles
+--> write playbook to associate role with hosts
+
+
+ansible	- playbook	--> ansible-galaxy
+chef	- cookbook	--> chef-supermarket
+puppet	- manifest	--> puppet-forge-site
+
+
+
+#Questions:
+1. when we can write in shell/python scripting why do we need tools like ansible, chef, puppet, saltstack?
+2. what is passwordless authentication?
+3. how to use the roles?
+
+
+
+#------------------------------------------------------------------------------------------
+
+
+
+#						----------- source control / version control systems -------------
+									----------------------------------------
+
+urls:
+
+git:	http://www.codebind.com/linux-tutorials/basic-git-commands-list/
+
+
+
+track the changes:
+
+Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-dlftb3c8/cryptography/
+#version control tools:
+clearcase
+svn
+git
+
+
+#GIT/GITHUB:
+-----------
+GitHub: Centralized server to store the source code
+Git:    tool to download/upload the code
+
+90% of the open source, source code is on git
+git --> #"Linus Torwalds".
+git bash --> CLI tool to download/upload code
+
+
+
+local workspace	---> index area	-----> staging area	----> gitHub Repository
+				add				commit				push
+
+index area		--> trak all the changes at local workspace
+staging area	--> commiting the changes to local repository and generates a key
+push			--> 
+
+
+git clone https://github.com/project.git		-->	1st time download all the code to local system
+
+git add .						-->	make track all the changes at local workspace
+
+git commit -m "give comment"	--> copying the changes from local repository to remote repository/gitHub		#generates key
+
+git push 						--> copy entire source code from local to remote repository/gitHub
+
+
+
+
+
+
+#commands:
+---------
+git config --global user.name "username"
+
+git config --global user.email "usergmail"
+
+git config --list
+
+git status		--> it will show the status
+
+git --version	--> git version
+
+git init	--> initialize git
+
+git clone https://github.com/project.git	--> 1st time download all the source code from gitHub to local system
+
+git add <file name>									-->	make track all the changes at local workspace
+
+git commit -m "give comment"				--> copying the changes from local repository to remote repository/gitHub		#generates key
+
+git remote add origin https://github.com/veera-090/git-notes.git
+
+git remote
+
+git push 							--> copy entire source code from local to remote repository/gitHub
+
+git branch							--> To see available branches
+
+git branch <new name of branch>		-->	create a new branch
+
+git checkout <branch name>			--> move to present branch to another branch
+
+git push -u origin <branch name>	--> create new branch at gitHub and push the code to gitHub 
+
+git merge <branch name>				--> merge new branch to the master		#merge must done from master branch only
+
+git branch --delete <branch name>	--> delete/remove branch
+
+git checkout --file <file name>		--> To revert the file
+
+git reset --hard					--> To revert the file
+
+git log 							--> To see the log files
+
+
+
+
+#Steps:
+------
+1) git clone https://github.com/project.git
+
+		git branch --> *develop
+						master
+						
+2) git branch <feaure/xyz branch>		-->	create a new branch
+
+3) git checkout <feaure/xyz branch>		--> move to present branch to another branch
+		
+		git branch --> *feaure/xyz
+						develop
+						master
+
+4) local changes	--> add
+						change
+						delete
+							
+5) Do the Tests locally before add  | git add <file name>	-->	make track all the changes at local workspace
+
+6) git commit -m "give comment"								--> copying the changes from local repository to remote repository/gitHub		#generates key
+
+7) git push -u origin <feaure/xyz branch>					--> create new branch at gitHub and push the code to gitHub
+
+8) open pull request	--> request for team lead to review
+
+		source branch		--> feaure/xyz code
+		destination branch	--> develop branch 
+		- message 	--> clear description about the code
+		
+9) git merge <develop branch>					--> merge feaure branch to develop branch
+
+
+
+
+
+
+
+
+
+
+#Questions:
+1. why do we need version control system?
+
+
+
+#IP address change (Permanently):
+------------------------------
+
+cat /etc/sysconfig/network-scripts/ifcfg-enpOs
+
+cat /etc/sysconfig/network-scripts/ifcfg-eth0
+
+ipaddress =
+bootproto=dhcp/static	--> dhcp = dynamic
+
+service network restart
+
+
+#Temporary IP address change:
+----------------------------
+
+ifconfig eth0 9.10.10.1 netmask 255.255.255.0 up
+
+
