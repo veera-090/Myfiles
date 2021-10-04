@@ -1,0 +1,156 @@
+Docker Commands:
+---------------
+
+Docker Components:
+-----------------
+
+1. Docker client
+
+2. Rest API
+
+	it is an interface for the communication between the "docker client" & "docker daemon"
+
+3. Docker daemon
+
+	It is a server, basically a long running program, It accept all the commands from the client and perform the operations
+		
+		Operations like 
+			- managing the containers
+			- manages the images
+		
+		
+		
+Docker Architecture:
+-------------------
+
+1.Client:
+
+	client --> pass commands
+			
+			docker build
+			docker pull
+			docker run
+
+2.Server:
+	Docker-host --> amazing service called "Docker Daemon"
+	
+			Daemon accept the commands from the client and perform the operations
+			
+			Operations like 
+				- managing the containers
+				- manages the images
+			
+			Daemon is a server, basically a long running program.
+			
+			Daemon doesnot really create containers - no
+			
+			daemon gets the request from client and these request goes to the "container d" 
+			
+	container d:
+			
+			it is a special service which is responsible to manage the lifecycle of container
+		
+	run c:
+	
+			it is a special service which is responsible to creates the containers for us
+			
+
+#########	Docker client --> Docker Daemon --> container D	--> run C --> container
+
+
+3.Registory:
+
+	where all the images are available like 
+	
+	- dockerhub
+	- nginx
+	
+	
+	
+	
+Data Volumes	--> store data
+	drivers: overlay2
+	
+containers		--> Run applications + store data
+images			--> used for creating containers
+
+  
+
+
+
+#commands:
+---------
+docker image ls		--> it shows the actual size of the entire image.
+
+docker history ubuntu:latest	--> to get a list containing all layers and their size
+
+#basic:
+------
+docker version		--> version and client + server details
+
+docker -v			--> version
+
+docker --version	--> version
+
+docker info			--> information about docker
+
+docker --help
+
+docker login		--> login to hub.docker.com
+
+docker info | less	--> to see information
+
+docker serach <centos/tomcat>	--> to search images
+
+docker attach centos			--> enter into another container OS
+
+docker run centos /usr/bin/free -m	--> memory usage/status
+
+docker top centos					--> To see which PID/PPID process is running
+
+docker stats centos					--> see all running container and their memory usage and PIDS
+
+docker cp centos:/etc/passwd /home/ubuntu/centos.passwd		--> copying the container running information to our system
+
+
+
+#images:
+-------
+docker images					--> show all docker images
+
+docker pull <image name/id>		--> pull the docker images from hub.docker.com
+
+docker run -dit --name centos --hostname=centos centos /bin/bash	--> run the docker image
+
+docker rmi <image id>			--> remove docker image
+
+
+
+#containers:
+-----------
+docker ps 						--> see all the containers
+
+docker ps -a					--> see all running containers
+
+docker run -it <docker image>	--> run the docker 
+
+docker start <container id>		--> start the docker
+
+docker stop <container id>		--> stop the docker 
+
+docker rm <container id>		--> remove docker container
+
+docker kill <centos>			--> remove all the running containers
+
+
+#system:
+-------
+docker stats					--> see all running container and their memory usage and PIDS
+
+docker system df				--> show disk usage of docker & all containers| images | volumes | size
+
+docker system prune				--> 
+
+#dangling images:
+----------------
+- dangling images means, images which are not associated with the running container
