@@ -1,0 +1,207 @@
+#------------ Scripted Pipeline ---------------
+
+node("master") {
+	def mvnHome
+		stage('Preparation Workspace') {
+			git branch: 'jkt-BRN001',
+			credentialsId: '9c4bf306-329c-43d8-83ee-e4ccbe3911f0'
+			url: 'https://gitlab.com/devops-grp002/jktproj001.git'
+		}
+		stage('Build with maven') {
+			// Run the maven build 
+			if (isUnix()) {
+				sh ''
+			}
+			else {
+				bat(/"C:\Programme\maven\apache-maven-3.8.1\bin\mvn" clean install -f RVS\RVS_ROOT\pom.xml)
+				bat(/"C:\Programme\maven\apache-maven-3.8.1\bin\mvn" clean install -f RVS\RVS_EAR\pom.xml)
+			}
+		}
+		stage('Result') {
+			junit '**/RVS_001/target/surefire-reports/TEST-*.xml'
+			archiveArtifacts '**/RVS_00*/target/*.jar'
+			archiveArtifacts '**/RVS_00*/target/*.war'
+			archiveArtifacts '**/RVS_00*/target/*.ear'
+		}
+}
+
+
+
+
+#---------- Declarative Pipeline -----------------
+
+
+--------------- windows1 -------------
+
+
+
+pipeline	{
+  agent any
+	stages	{
+		stage ('Build from Maven ROOT')	{
+			steps	{
+				bat "C:/Programme/maven/apache-maven-3.8.1/bin/mvn clean install -f RVS/RVS_ROOT/pom.xml"
+			}
+		}
+	}		
+}
+
+
+
+
+------- 2nd Method  ------------
+
+pipeline	{
+  agent any
+	stages	{
+		stage ('Build from Maven ROOT')	{
+			steps	{
+				bat "C:/Programme/maven/apache-maven-3.8.1/bin/mvn clean install -f %module%/%module%_ROOT/pom.xml"
+			}
+		}	
+		stage ('Deployment')	{
+			steps	{
+				bat 'echo y | "C:/Programme/putty/pscp" -i "C:/Users/Administrator/Desktop/veera/keys/veera-aws.ppk" %module%/%app%/target/%app%.war ec2-user@10.0.0.15:/%source%'
+				bat 'echo y | "C:/Programme/putty/pscp" -i "C:/Users/Administrator/Desktop/veera/keys/veera-aws.ppk" %module%/%app%/target/%app%.war ubuntu@10.0.0.22:/devops/docker_files/installables/'
+			}
+		}
+	}		
+}
+
+
+
+------- 3rd Method  ------------
+
+
+
+pipeline	{
+	environment { 
+        registry = "veeradocker6/devops" 
+        registryCredential = 'dockerhub' 
+        dockerImage = '' 
+    }
+  agent none
+	stages	{
+		stage ('Build from Maven ROOT')	{
+			agent	{
+				label 'master'
+			}
+				steps	{
+					echo "Bild the source code:"
+					bat "C:/Programme/maven/apache-maven-3.8.1/bin/mvn clean install -f %module%/%module%_ROOT/pom.xml"
+
+					echo "Copying Applications to different servers"
+					bat 'echo y | "C:/Programme/putty/pscp" -i "C:/Users/Administrator/Desktop/veera/keys/veera-aws.ppk" %module%/%app%/target/%app%.war ec2-user@10.0.0.15:/%source%'
+					bat 'echo y | "C:/Programme/putty/pscp" -i "C:/Users/Administrator/Desktop/veera/keys/veera-aws.ppk" %module%/%app%/target/%app%.war ubuntu@10.0.0.22:/devops/docker_files/installables/'
+				}
+		}
+		
+		stage ('Tomcat Deployment')	{
+			agent	{
+				label 'linux'
+			}	
+				steps	{
+					echo "Deploy the Tomcat application at linux:"
+					sh '/devops/JKTPROJ001/tomcat_d003 %server% %app% %source%'
+				}
+		}
+		
+		stage ('Docker Deployment')	{
+			agent {
+				label 'ubuntu'
+			}
+				steps	{
+					sh '''
+						echo "Docker Build:"
+						cp -R /devops/docker_files/installables/ .
+						sudo docker build -t veeradocker6/devops:v$Build_Number . -f /devops/docker_files/Dockerfile --build-arg app=$app
+						sudo docker images
+					'''
+				}
+		}
+	}		
+}
+
+
+
+------- 4th Method  ------------
+
+
+
+
+pipeline	{
+	environment { 
+        registry = "veeradocker6/devops" 
+        registryCredential = 'dockerhub' 
+        dockerImage = '' 
+    }
+  agent none
+	stages	{
+		stage ('Build from Maven ROOT')	{
+			agent	{
+				label 'master'
+			}
+				steps	{
+					echo "Build the source code:"
+					bat "C:/Programme/maven/apache-maven-3.8.1/bin/mvn clean install -f %module%/%module%_ROOT/pom.xml"
+
+					echo "Copying Applications to different servers"
+					bat 'echo y | "C:/Programme/putty/pscp" -i "C:/Users/Administrator/Desktop/veera/keys/veera-aws.ppk" %module%/%app%/target/%app%.war ec2-user@10.0.0.15:/%source%'
+					bat 'echo y | "C:/Programme/putty/pscp" -i "C:/Users/Administrator/Desktop/veera/keys/veera-aws.ppk" %module%/%app%/target/%app%.war ubuntu@10.0.0.22:/devops/docker_files/installables/'
+				}
+		}
+		
+		stage ('Tomcat Deployment')	{
+			agent	{
+				label 'linux'
+			}	
+				steps	{
+					echo "Deploy the Tomcat application at linux:"
+					sh '/devops/JKTPROJ001/tomcat_d003 %server% %app% %source%'
+				}
+		}
+		
+		stage ('Docker Deployment')	{
+			agent {
+				label 'ubuntu'
+			}
+				steps	{
+					sh '''
+						echo "Docker Build:"
+						cp -R /devops/docker_files/installables/ .
+						sudo docker build -t veeradocker6/devops:v$BUILD_NUMBER . -f /devops/docker_files/Dockerfile --build-arg app=$app
+						sudo docker images
+						sudo docker login -u veeradocker6 -p $password
+						sudo docker push veeradocker6/devops:v$BUILD_NUMBER
+						sudo docker rmi veeradocker6/devops:v$BUILD_NUMBER
+					'''
+				}
+		}
+	}		
+}
+
+
+
+
+
+
+
+-------- windows2 ----------- 
+
+
+pipeline	{
+  agent any
+	stages	{
+		stage ('Build from Maven ROOT')	{
+			steps	{
+				bat "C:/Programme/Maven/apache-maven-3.8.1/bin/mvn clean install -f %module%/%module%_ROOT/pom.xml"
+			}
+		}	
+		stage ('Deployment')	{
+			steps	{
+				bat 'echo y | "C:/Programme/putty/pscp" -i "C:/Users/Administrator/Desktop/veera/keys/veera-aws.ppk" %module%/%app%/target/%app%.war ec2-user@10.0.0.15:/%source%'
+				bat 'echo y | "C:/Programme/putty/pscp" -i "C:/Users/Administrator/Desktop/veera/keys/veera-aws.ppk" %module%/%app%/target/%app%.war ubuntu@10.0.0.22:/devops/docker_files/installables/'
+			}
+		}
+	}		
+}
