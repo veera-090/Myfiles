@@ -1,0 +1,378 @@
+
+
+Git commands:
+------------
+
+1. create new organization: 
+
+organization URL:	https://github.com/LearnNgain-github
+
+
+2. create new repository:
+
+walmart-project URL:	https://github.com/LearnNgain-github/wallmart.git	--> https
+						git@github.com:LearnNgain-github/wallmart.git		--> ssh
+						
+amazon-project URL:		https://github.com/LearnNgain-github/amazon.git		--> https
+						git@github.com:LearnNgain-github/amazon.git			--> ssh
+						
+						
+3. create new team:
+
+walmart-devteam URL:	https://github.com/orgs/LearnNgain-github/teams/walmart-devteam		--https
+
+
+4. Add the Developers to the team:
+
+5. Provide Repo access to the Developers:
+
+
+
+
+*********************************************************************************************
+
+#######Note:
+ 
+- +-+without commit to any created new file at working area switched to another branch will gives error i.e that file shows at all the branches
+
+- merge conflicts happen when writing same files at same line	[git merge]
+
+- how to get particular branch particular commit id folders/files only 		[git cherry-pick <commit ID>]
+
+- how to verify the ssh configuration is working or not?					[ ssh -T git@github.com ] or [ ssh -T git@mss.ghe.com ]
+
+
+
+
+
+
+***********************************************************************************************
+
+git --version
+
+git init
+
+.git
+
+
+
+Untracked files
+working area	********		staging area	*******************************		local repository	*************************************	 remote repository		
+				<git add .>						<git commit -m "commit message">						<git push <alias /github URL> master>
+working area	********		staging area	*******************************		local repository	*************************************	 remote repository
+
+
+
+
+
+git status
+
+git add <./ * / filename/ directory name>
+
+
+git config --global --list
+git config --global user.name "username"
+git config --global user.email "usermail"
+
+
+
+git commit -m "<commit message>"
+
+git commit -a -m "<commit message>"		===> whenever the file is modified
+
+git remote add <alias name/walmart> <github/ssh URL>
+
+git remote -v
+
+git remote remove <alias name>		===> to delete alias/mapped url
+
+git push <alias / walmart/ github URL> <branch name/ master>
+
+
+
+git credentials:
+---------------
+usename/mail:
+password/access token:
+
+git-profile >> settings >> deleveper settings >> generate user access token
+
+
+
+
+git log
+
+git show b87654ad345df		===> display particular commit ID files
+
+git log -2		===> list the only 2 commit id
+
+git show --pretty="" --name-only 341a7fa66
+
+git clean -n	===> show what are the new files we want remove at working area
+
+git clean -f 	===> remove only newly created files at "working area"
+
+git reset		===> get back the files/folders from "staging area --> working area"
+
+git reset <file/dir name>	===> get back particular files/folders from "staging area --> working area"
+
+git revert <latest commit ID>	===> git back new files/dir from "remote repository --> local repository" & delete newly add files/dir at "local repository".
+
+git push <alias name/github url> <branch name> -f	
+
+.git ignore
+
+
+
+
+******Branch:*********
+
+git branch			==> to see branches
+
+git branch -r		===> to see remote branches
+
+git branch -a 		===> to see local branches
+
+git branch <branchname>		===> create branch
+
+git checkout <branchname>	===> switch branch
+
+git branch -d <branchname>		===> delete the branch at local repository
+
+
+
+##Note: without commit to any created new file at working area switched to another branch will gives error i.e that file shows at all the branches
+
+
+
+git diff <another branchname>	===> to see the differnces b/w the branches
+
+git merge <branchname>			===> merge the branches
+
+git checkout -b <branchname>	===> create branch and switch to that branch
+
+git checkout -b <feature branch> <dev branch>	===> at present master branch, switch & create the feature branch, from dev branch. but not from master 
+
+
+
+
+****** push: *******
+
+git push <alias name> <branchname1> <branchname2>	===> push some specific branches to remote repository from local repository
+
+git push <alias name> --all 			===> push all branches to remote repository from local repository
+
+git branch -d <branchname>		===> delete the branch at local repository
+
+git push <alias> :<branchname>	===> delete the branch at remote repository
+
+
+
+
+******** Tag: *********
+
+git tag
+
+git tag <tag name>				===> create tag
+
+git tag -d <tag name>			===> delete the tag at local repository
+
+git push <alias> tag <tag name>
+
+git push <alias> --tags
+
+
+
+
+******** Stash: *********
+
+git stash
+
+git stash list			===> see all the stashes
+
+git stash apply			===> to get back recent one from stash
+
+git stash apply stash@{1}	===> to get back particular one from stash
+
+git stash drop			===> to delete stash recent one
+
+git stash drop stash@{1}	===> to delete particular one at stash
+
+git stash pop			===> to get back recent one & delete at stash 
+
+
+
+
+
+********* cherry_pick: *********
+
+- how to get particular branch particular commit id folders/files only 		
+
+git cherry-pick <commit ID>
+
+
+- go to particulart branch	[ git checkout <branchname> ]
+- take commit ID			[ git log ]
+- come back to branch		[ git checkout <branchname> ]
+- execute the cherry-pick 	[ git cherry-pick <commit ID> ]
+
+
+
+
+
+********* Clone: **********
+
+git clone URL	===> to get the entire work flow at initial stage of new project 
+
+
+
+
+******** fetch & pull ***********
+
+git pull
+
+git fetch
+	
+	
+remote repository
+	|					|
+	|	git fetch		|
+	v					|
+local repository		|	git pull
+	|					|
+	|	git merge		|	
+	v					v
+working area
+
+
+git pull = git fetch + git merge <branchname>
+
+git fetch <alias> <branchname>
+
+git merge <alias/branchname>
+
+git pull <alias> <branchname>
+
+
+
+
+******* SSH Keys: ***********
+
+ssh-keygen
+
+~/.ssh
+
+id_rsa		==> private
+
+id_rsa.pub	==> public
+
+
+
+dsa:
+---
+ssh-keygen -t dsa
+
+id_dsa
+
+id_dsa.pub
+
+
+
+********** Files at ~/.ssh: ************
+
+~/.ssh/known_hosts	===> It saves all the host details when connecting to other systems at first time
+
+~/.ssh/config		===> timout 
+Host *
+	ServerAliveInterval 30
+	ServerAliveCountMax 2
+	
+
+ssh -T git@github.com		==> how to verify the ssh configuration is working or not?
+
+https://mss.ghe.come
+
+ssh -T git@mss.ghe.com		==> at real time
+
+git remote add <alias name/walmart> <github/ssh URL>		==> mapping the ssh URL
+
+
+
+*********** Personal Access Token: ***********
+
+#How we can use Github API?		--> 
+
+- when we can use Personal Access Token		==> its for passworless
+
+
+
+****** rebase *********
+
+- what is the difference between git merge & git rebase ?
+
+merge:
+
+maaster- mc1 -- mc2 -- dc3 (all at one commit ID  i.e dc1 -- dc2 -- dc3)
+				|
+				v
+				developer- dc1 -- dc2 -- dc3
+
+
+rebase:
+
+maaster- mc1 -- mc2 -- dc1 -- dc2 -- dc3
+				|
+				v
+				developer- dc1 -- dc2 -- dc3
+
+
+
+master> git rebase developer  
+
+master> git merge developer
+
+
+
+
+
+
+git branching strategies
+
+git rebase
+
+README.md file		===> helping directory about the repository
+
+pull request		===> with pull request we can integrate/ merge the code b/w two branches
+
+fork				===> fork the repository
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

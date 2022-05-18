@@ -1,0 +1,554 @@
+
+
+#Token for joining the Workers: 
+
+kubeadam token create --print-join-command
+
+
+#Weave network setup:
+
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+
+
+
+
+#Namespace:
+-----------
+	- Logical grouping of K8s resources.
+	
+#imperative:
+
+kubectl create ns <namespace>
+
+
+#declarative:
+
+kubectl api-resources
+
+vi filpkart.yaml/yml
+
+kubectl apply -f <filename>.yaml/yml
+
+kubectl get all -n <namespace>
+
+kubectl get <namespace name> -n <namespace name>
+
+kubectl get ns
+
+kubectl delete -f <filename>.yaml/yml
+
+
+
+apiVersion: v1
+kind: Namespace
+metadata:
+	name: flipkartns (or) Namespace name
+	labels:
+		key: value
+		teamname: flipkartteamns
+---
+apiVersion:
+kind: ResourceQuota
+metadata:
+	name: resourcequota name
+	namespace: Namespace name/flipkartns
+spec:
+	hard:
+		requests.cpu: "1"
+		requests.memory: "1Gi"
+		limits.cpu: "2"
+		limits.memory: "2Gi"
+		Pods: "2"
+		
+		
+		
+---------------------------------------------------------------------
+
+		
+		
+#PODS:
+------
+	PODS is a smallest building block (or) basic unit of scheduling in K8s.
+	PODS represents running procees in K8s.
+	PODS contains one (or) more containers.
+
+#imperative:
+	
+kubectl run <podName> --image=<imageName>
+		
+kubectl run <podName> --image=<imageName> -n <namespace Name>
+
+kubectl delete pod <podName> -n <Namespace name>					--> #Delete the Pod
+
+
+#Types of PODS:
+1. Single container PODS
+2. Multi container PODS (Side Car containers)
+	a. Primary/main container 
+	b. Utility/helper container
+
+static Pods		--> /etc/kubernetes/manifests/
+
+
+
+#declarative:
+
+kubectl get-api resources		
+		
+kubectl delete -f <filename>.yaml/yml
+
+kubectl get all -n <Namespace name>
+
+kubectl get pods -o wide -n <Namespace name>
+
+kubectl describe pod <podName> -n <Namespace name>
+
+
+
+		
+apiVersion: v1		
+kind: Pod
+metadata:
+	name: <PodName>
+	namespace: <Namespace name>
+	labels:
+		key: value
+		app: <podName>
+spec:		
+	containers:
+	- name: <containerName>
+	  image: <imageName>
+	  ports:
+	  - containerPort: 8080<containerPort>
+	  resources:
+		requests:
+			cpu: 200m
+			memory: 512Mi
+		limits:
+			cpu: 512m
+			memory: 1Gi
+	- name: <containerName>
+	  image: <imageName>
+	  ports:
+	  - containerPort: 8080 <containerPort>
+	  env:
+	  - name: ********
+		value: *****
+	  resources:
+		requests:
+			cpu: 200m
+			memory: 512Mi
+		limits:
+			cpu: 512m
+			memory: 1Gi
+		
+
+
+---------------------------------------------------------------
+
+		
+	
+#Service:
+--------
+	- Servie is responsible for making the pods discoverable inside the network or exposing them to the internet.
+	- A Service identifies pods by its LabelSelectors.
+
+Types of Services:
+-----------------
+Cluster IP
+Node Port
+Load Balancer (external Load Balancer)
+HeadLess
+
+
+
+#clusterIP:
+
+kubectl expose pod <podName> --port --type=virtual/clusterIP	--> #imperative
+
+kubectl get <service name> -n <Namespace name>
+
+kubectl get pods --show-labels -f <Namespace name>
+
+curl -L <serviceIP/clusterIP>:<servicePort/clusterPort> / <application context path>
+
+
+#FQDN --> Fully Qualified Domain Name
+
+<serviceName>.<Namespace name>.svc.cluster.local/<application context path>
+
+
+#declarative:
+
+apiVersion: v1
+kind: Service
+metadata:
+	name: <ServiceName>
+	namespace: <Namespace name>
+	labels:
+		key: value
+spec:
+	type: <Cluster IP/ Node Port/ Load Balancer>
+	selector:
+		key: value
+		app: javawebapp
+	ports:
+	- port: <servicePort/defaultPort>
+	  targetPort: <containerPort>
+
+
+
+
+
+#Node Port:
+
+
+#declarative:
+
+apiVersion: v1
+kind: Service
+metadata:
+	name: <ServiceName>
+	namespace: <Namespace name>
+	labels:
+		key: value
+spec:
+	type: <NodePort /Load Balancer /ClusterIP>
+	selector:
+		key: value
+		app: javawebapp
+	ports:
+	- port: <servicePort/defaultPort>
+	  targetPort: <containerPort>
+	  nodePort: <30000-32676>
+	
+
+
+
+------------------------------------------------------------------
+
+
+
+#Types of Controllers:
+ReplicationController
+RelicaSet
+Deployment
+StatefulSet
+DaemonSet
+
+
+#Replication Controllers:
+-------------------------
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+	name: <ReplicationController Name>
+	namespace: <Namespace name>
+	labels:
+		key: value
+spec:
+	replicas: 1	# No.of PODS
+	selector:
+		key: value
+		app: javawebapp
+	template:
+		metadata:
+			name: <podName>
+			labels:			#pod labels
+				key: value
+				app:javawebapp
+		spec:
+			containers:
+			- name: <containerName>
+			  image: <imageName>
+			  ports:
+			  - containerPort: 8080<containerPort>
+			  resources:
+				requests:
+					cpu: 200m
+					memory: 512Mi
+				limits:
+					cpu: 512m
+					memory: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+	name: <serviceName>
+spec:
+	type: <NodePort /Load Balancer /ClusterIP>
+	selector:
+		key: value
+		app: javawebapp
+	ports:
+	- port: 80<servicePort/defaultPort>
+	  targetPort: 8080<containerPort>
+	  nodePort: <30000-32676><nodeport>
+
+
+---------------------------------------------------------------
+
+
+
+#RelicaSet:
+----------
+similar to replication controller. But difference is at equality and set based.
+
+ReplicationController: --> Equality selector
+
+RelicaSet:				--> Equality & Set selector
+
+
+
+
+apiVersion: apps/v1
+kind: RelicaSet
+metadata:
+	name: <name of RelicaSet>
+	labels:
+		key: value
+		app: javawebapp
+	namespace: <Namespace name>
+spec:
+	replicas: 2 #No. of PODS
+	selector:
+		matchLabels:
+			key: value
+			app: javawebapp
+		matchExpressions:
+			key: <label key>
+			operator: In
+			values:
+			- <values1>
+			- <values2>
+	template:				
+		metadata:
+			name: <podName>
+			labels: 			#Pod Labels
+				key: value
+				app: javawebapp
+		spec:
+			containers:
+			- name: <containerName>
+			  image: <imageName>
+			  ports:
+			  - containerPort: 8080<containerPort>
+---
+apiVersion: v1
+kind: Service
+metadata:
+	name: <serviceName>
+spec:			
+	type: <NodePort/ ClusterIP/ Load Balancer>
+	selector:
+		key: value
+		app: javawebapp
+	ports:
+	- port: 80 <servicePort/defaultPort>
+	  targetPort: 8080 <containerPort>
+	  nodePort: <30000-32767> <nodePort>
+			
+
+
+
+------------------------------------------------------------------------
+
+
+
+
+#DaemonSet:
+----------
+
+Whenever node is create in the cluster, then POD is also create.
+If node is remove in the cluster, then POD also remove.
+
+
+
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+	name: <name of DaemonSet>
+	labels:
+		key: value
+		app: javawebapp
+	namespace: <Namespace name>
+spec:
+	selector:
+		matchLabels:
+			key: value
+			app: javawebapp
+		matchExpressions:
+			key: <label key>
+			operator: In
+			values:
+			- <values1>
+			- <values2>
+	template:				
+		metadata:
+			name: <podName>
+			labels: 			#Pod Labels
+				key: value
+				app: javawebapp
+		spec:
+			containers:
+			- name: <containerName>
+			  image: <imageName>
+			  ports:
+			  - containerPort: 8080<containerPort>
+
+
+
+
+---------------------------------------------------------------------------
+
+
+
+
+#Deployment:
+-----------
+
+
+#Recreate Strategy:
+------------------
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+	name: <name of deployment>
+	labels:
+		key: value
+	namespace: <Namespace name>
+spec:
+	replicas: 2 #No.of PODS
+	strategy:					#Recreate strategy
+		type: Recreate	
+	selector:
+		matchLabels:
+			key: value
+			app: javawebapp
+		matchExpressions:
+			key: <label>
+			operator: In
+			- <values1>
+			- <values2>
+	template:
+		metadata:
+			name: <PodName>
+			labels:
+				key: value
+				app: javawebapp
+		spec:
+			containers:
+			- name: <containerName>
+			  image: <imageName>
+			  ports:
+			  - containerPort: 8080 <containerPort>
+---
+apiVersion: v1
+kind: Service
+metadata:
+	name: <ServiceName>
+spec:
+	type: <NodePort/ ClusterIP/ Load Balancer>
+	selector:
+		key: value
+		app: javawebapp
+	ports:
+	- port: 80 <servicePort>
+	  targetPort: 8080 <containerPort>
+	  nodePort: <30000-32767> <nodeport>
+	  
+	  
+	  
+	  
+	  
+#RollingUpdate Strategy:
+-----------------------
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+	name: <name of deployment>
+	labels:
+		key: value
+	namespace: <Namespace name>
+spec:
+	replicas: 2 #No.of PODS
+	strategy:					#RollingUpdate strategy
+		type: RollingUpdate
+		rollingUpdate:
+			maxSurge: 1
+			maxUnavailable: 1
+	minReadySeconds: 60		
+	selector:
+		matchLabels:
+			key: value
+			app: javawebapp
+		matchExpressions:
+			key: <label>
+			operator: In
+			- <values1>
+			- <values2>
+	template:
+		metadata:
+			name: <PodName>
+			labels:
+				key: value
+				app: javawebapp
+		spec:
+			containers:
+			- name: <containerName>
+			  image: <imageName>
+			  ports:
+			  - containerPort: 8080 <containerPort>
+---
+apiVersion: v1
+kind: Service
+metadata:
+	name: <ServiceName>
+spec:
+	type: <NodePort/ ClusterIP/ Load Balancer>
+	selector:
+		key: value
+		app: javawebapp
+	ports:
+	- port: 80 <servicePort>
+	  targetPort: 8080 <containerPort>
+	  nodePort: <30000-32767> <nodeport>
+	  
+	  
+	  
+	  
+----------------------------------------------------------------------
+
+
+NFS-Server:
+----------
+
+#installation of NFS Server:
+
+sudo apt update -y
+
+sudo apt install nfs-kernel-server -y	#install NFS-Server
+
+sudo mkdir -p /mnt/nfs_share			#create NFS directory to share to the client
+
+sudo chown -R nobody:nogroup /mnt/nfs_share		#give all the access permissions to users & groups
+
+sudo chmod -R 777 /mnt/nfs_share				#give read & write permissions to all
+
+sudo vi /etc/exports	
+
+/mnt/nfs_share <IP address or *>(rw,sync,no_subtree_check,no_root_squash)
+
+sudo exportfs -a
+
+sudo systemctl restart nfs-kernel-server		#restart the nfs-kernel-server
+
+sudo apt install nfs-common -y					#install NFS client softwares for Ubuntu
+
+sudo yum install nfs-utils -y 					#install NFS cleint softwares for Redhat/Fedora/Centos
+

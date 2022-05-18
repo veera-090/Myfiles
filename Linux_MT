@@ -1,0 +1,703 @@
+					Linux:
+					-----
+					
+				
+/home
+
+/bin
+
+/sbin
+
+/var
+
+/opt
+
+/dev
+
+/tmp
+
+ls
+
+pwd
+
+
+
+
+directory:
+---------
+
+mkdir dirname
+
+mkdir -v dirname										--> -v is versbose
+
+mkdir -p DevOps/Linux/ShellScript/Git/Maven/Tomcat 		---> -p is parent
+
+mkdir -vp DevOps/Linux/ShellScript/Git/Maven/Tomcat 	---> -vp is parent with versbose
+
+mkdir -m 744 dirname/filename							---> change the permission;	-m is mode
+
+
+*********************************************************************
+
+listing:
+-------
+
+ls -l 		---> longlist
+
+ls -la		---> show all hidden files; -a is all 
+
+ls -lt		---> show the list
+
+ls -ltr		---> show the list in reverse order
+
+++what is inode?
+
+Inode is a Data structure, it can store the file/dir info.
+
+	size of the file/dir
+	
+	permissions
+
+ls -li		---> list the inode
+
+ls -lh		---> list in human readable format
+
+
+**********************************************************************
+
+tree
+
+sudo su - 			---> $ec2-user --> root user 
+
+/home/ec2-user		---> ec2-user user home directory
+
+/home/ubuntu		---> ubuntu user home directory
+
+/root				---> root user home directory
+
+/					---> root/parent directory
+
+cd					---> directory change
+
+cd ~ or cd			---> user working directory
+
+cd -				---> previous user working directory
+
+cd .				---> present directory
+
+cd ..				---> previous directory
+
+
+*********************************************************************
+
+
+RHEL/CentOS/Fedora:
+------------------
+yum install
+
+rpm 
+
+/etc/yum.repo.d		---> yum repository
+
+
+Ubuntu:
+------
+apt install
+
+apt-get install
+
+
+
+********************************************************************
+
+
+Delete:
+------
+rmdir <dirname/filename>	---> delete empty directory
+
+rm -r <dirname/filename>	---> delete directory; 	-r is recursive
+
+rm -rf <dirname/filename>	---> delete directory forecely; 	-r is recursive; -f is forecely
+
+man rmdir 					---> for taking help
+
+
+
+********************************************************************
+
+
+editors:
+-------
+vi 
+
+vim
+
+
+********************************************************************
+
+
+File:
+----
+touch <filename>			---> create a file
+
+
+# how to search all the empty files in currenet directory?	==> find -f
+
+$find . -type f -empty
+
+$find ~ -type f -empty
+
+find / -type f -empty
+
+find /opt/ -type f -empty
+
+
+# how to search all the empty files in currenet directory?	==> find -d
+
+find . -type d -empty
+
+find ~ -name devops.sh
+
+find . -iname python.txt		---> search python.txt file under current directory ignoring the case
+
+find . -type f -perm 0777		---> search all the files which have 777 permission 
+
+find . -mtime 1					---> find all the files modified exact 1 day in currenet directory
+
+find . -mtime +1				---> it will find all the files modified morethan 1 day 
+
+find . -mtime -1				---> it will find all the files modified lessthan 1 day
+
+find / -mmin -10				---> it will display all the files which are modified lessthan 10 min ago
+
+find /logs/ -mmin +30 -exec rm -f {}\	---> it will remove the logs which are created morethan 30 min back in /logs directory
+
+
+
+******************************************************************************
+
+
+changing permissions:
+--------------------
+
+umask 
+
+
+					umask	file	directory
+root 			--> 0022	644		755
+
+normal user 	--> 0002	664		775
+
+
+# how to change umask value?
+umask 0222		--> to change the umask value
+
+
+base permission for file is: 0666
+						 (-) 0022
+							-----
+							 0644
+							-----
+							
+base permission for directory is: 0777
+							  (-) 0022
+								 ------
+								  0755
+								 ------							
+
+
+d --> directory
+- --> file
+l --> link
+
+directory/file/link					- 1
+permissions - read/write/execute	- 2
+no.of files in dir					- 3
+user id								- 4
+group id							- 5
+size of file/dir					- 6
+date								- 7
+file name							- 8
+
+
+read    - r	- 4
+write   - w - 2
+execute - x - 1
+
+u - owner/ current user --> dev1, dev2
+g - group 				--> dev
+o - others				--> test1, build, prod
+
+rwx r-x r--
+
+u - owner	dev1	--> rwx 	7
+g - group	dev2	--> r-x		5
+o - others	test1	--> r--		4
+
+rwx r-x r--	DevOps.txt
+
+# how to set umask value permanently?
+
+vi ~/.bash_profile
+
+umask 0222
+
+chmod 755 DevOps.txt
+
+mkdir -m 755 DevOps		
+
+chmod u+rw  DevOps.txt		--> rw- --- ---
+
+chmod --> change mode 
+
+chmod u+rwx, g+rwx, o+rwx <file name>	--> giving all permissions
+
+chmod u+rwx, g-w, o-wx <file name> 	
+
+chmod 777 <file/dir name>		==> rwx rwx rwx
+
+chmod -R 754 <file/dir name>	==> rwx r-x r--			change the permission of file & directory and also inside the file of directory;		-R is recursive
+
+chmod 744 <file/dir name>		==> rwx r-- r--
+
+id / whoami	-->	check what is the current user
+
+cat /etc/*release	--> check version
+
+
+sudo su -			--> switch to the root user
+
+chown root <file/dir name>		--> change the ownership of the file & directory
+
+chown -R root <file/dir name>   --> change the ownership of the file & directory and also inside the file of directory;		-R is recursive
+
+chgrp -R root <file/dir name>   --> change the group ownership of the file & directory and also inside the file of directory;		-R is recursive
+
+chgrp wheel <file/dir name>		--> change the group of the file & directory;		-R is recursive
+
+chown -R <ec2-user>:<ec2-user> <file/dir name>	--> change the permissions at a time
+
+chown <ec2-user>:<ec2-user> <file/dir name>	--> change the permissions at a time
+
+
+
+********************************************************************************
+
+
+# Copy & Move & FIle & WordCount & Link:
+-------------------------------------
+cp	--> copy
+
+cp balaji/ python/
+
+cp -r balaji/ python/ 	
+
+man cp
+
+
+Move:
+----
+mv	--> move
+
+mv balaji.sh krishna.sh
+
+mv -r balaji/ python/
+
+
+file:
+----
+file <filename>			--> to know what type of file it is
+
+
+WordCount:
+---------
+wc						--> word count
+
+wc <filename>			--> to know how many word count are there
+
+wc -l <filename>		--> to know no.of line numbers
+
+wc -w <filename>		--> to know no.of words
+
+wc -c <filename>		--> to know no.of characters
+
+
+link:
+----
+ln	--> link
+
+ln devops.txt lntest.txt
+
+ln filename linkfilename
+
+
+hard link												soft link / symbolic link
+---------												-------------------------
+
+ln filename linkfilename								ln -s filename linkfilename
+
+original file & hard link ---> same properties			original file & soft link ---> not same properties
+
+once delete o.f able to access link file content		not able to access link files if delete o.f content
+
+
+# soft link is used for creating files/ directory
+
+# hard link is not used for directory. only for files
+
+
+
+****************************************************************
+
+
+Text Editors:
+------------
+
+esc mode 	--> i 	--> insert mode
+
+insert mode --> esc --> escape mode
+
+vi or vim	--> Text editors
+
+nano		--> another editor
+
+:se nu		--> to see the schedule line numbers
+
+:se nonu	--> to remove the schedule line numbers
+
+/RHEL		--> highlight & search anyword or number
+
+dd			--> delete the line
+
+
+esc dd	---> Delete the line
+esc yy	---> Copy the line
+esc p	---> Paste the line
+esc i	---> To insert content 
+esc u 	---> To modify the content back to original
+:w		---> To save
+:wq		---> To Save and Quit
+:q!		---> To Quit without save
+:q		---> To quit
+nyy		---> will copy n no.of lines 
+ndd		---> will cut n no.of lines
+p 		---> paste
+
+/<word/pattern>	--> search at word/pattern in vi-editor
+
+
+#multiple files:
+---------------
+
+vim -o <file1> <file2>	--> will open 2 files vertically	| ctrl + w --> curser switch between the files
+vim -o <file1> <file2>	--> will open 2 files horizontally	| ctrl + w --> curser switch between the files
+
+
+*****************************************************************
+
+
+Text Reading/Display:
+--------------------
+echo "Hello world"		--> Display the content
+
+cat -n <filename>		--> Display the conetent with line numbers
+
+head <filename>			--> display first 10 lines
+
+head -n 20 <filename>	--> display particular lines from first 20 lines
+
+head -20 <filename>		--> display particular lines from first 20 lines
+
+tail <filename>			--> display last 10 lines
+
+tail -n 20 <filename>	--> display particular lines from last 20 lines 
+
+tail -20 <filename>		--> display particular lines from last 20 lines 
+
+tail -f <filename>		--> display last 10 lines
+
+sed -n "108p" <filename>		--> display particular line
+
+sed -n "108,114p" <filename> 	--> dispaly particular range of lines
+
+sed "s/red/blue" <filename>		--> replace first all line with blue
+
+sed "s/red/blue/g" <filename>	--> replace all the lines with blue
+
+more <filename>					--> diplay content upto the screen by screen;	#ctrl + f = next page; enter = next line;
+
+less <filename>					--> diplay content upto the screen by screen;	#ctrl + f = next page; ctrl + b = backward;
+
+sort <filename>					--> display content in ascending order
+
+sort -r <filename>				--> display content in descending order
+
+cat <filename> | sort 			--> giving output to another commands input		#pipe
+
+cat <filename> | sort -r 		--> giving output to another commands input		#pipe
+
+cat <filename> | sort | tr [a-z] [A-Z]			--> translate Lowercase to Uppercase	#pipe with translate
+
+grep <search content> <filename/location>		--> search the content
+
+grep -i <search content> <filename/location>	--> search the content
+
+
+sed 	--> # stream editor
+
+grep	--> # global regular expression print
+
+
+*****************************************************************
+
+System resource commands:
+------------------------
+
+uname
+
+who				--> To know how many users are connected
+	
+who -H			--> To know how many users are connected
+
+w
+
+uptime			--> To know when ther server is up
+
+users			--> To know the how many users are logedin
+
+whoami			--> to know which server you logedin
+
+whereis ls 		--> to know where reference commands are available
+
+date
+
+date -s "YYYYMMDD"		--> to set date
+
+df 						--> to know hard disk space usage
+
+df -h					--> to know hard disk space usage in human readable format
+
+du -h .					--> to know the present directory of file space usage utilisation
+
+du -sh 					--> estimate file space usage with summary
+
+du -sh /opt/			--> estimate file space usage of particular directory
+
+hostname				--> to know the hostname
+
+hostname <new hostname>	--> to change the hostname
+
+ifconfig				--> to know the IP address
+
+ip a 					--> to know the IP address
+
+hostname -i				--> to know the IP address
+
+man	--help				--> used for help
+
+man mkdir				--> used for help to create directory
+
+info mkdir				--> used for help
+
+whatis date				--> used  for help
+
+whatis mkdir			--> used for help
+
+systemctl list-unit-files		--> all the services
+
+systemctl						--> 7.x
+
+service sshd status
+
+service sshd stop
+
+service sshd start
+
+service sshd restart
+
+systemctl sshd status
+
+last						--> know how many users logedin and how much time they spend
+
+
+Process management commands:
+---------------------------
+
+ps 							--> current process running (PID)
+
+ps -ef						--> to see all the users process ID
+
+kill -l						--> to see the list of kill
+
+kill -9 PID					--> to kill the PID
+
+top							--> to know the server resources utilisation
+
+sar (system activity report)--> It is used to collect the CPU, Memory & I/O usage
+
+
+Archive/data backup commands:
+----------------------------
+
+zip			--> package & compress (archive) files
+
+unzip		--> extract compressed files in a zip archive
+
+tar			--> It is used to archive the directory/file
+
+zip -r <zip filename> <dirname>		--> zip -r devops.zip Devops/		--> zip the file
+
+unzip devops.zip														--> unzip the file
+
+tar -cvf <tar filename> <dirname>		--> tar -cvf devops.tar Devops/ --> tar the file
+
+tar -xvf <tar filename>					--> tar -xvf devops.tar			--> extract the tar file 
+
+
+User/Group administration commands:
+----------------------------------
+
+useradd username			--> create a user
+
+/home	--> bhaskar
+
+/etc/shadow
+
+/etc/passwd
+
+/etc/group
+
+RHEL 7.x version	--> starts UID from 1000
+
+RHEL 6.x version	--> starts UID from 500
+
+passwd username		--> create password to user
+
+chage username		--> set the expiry date for password
+
+groupadd groupname	--> create group
+
+usermod -g<groupname> <username>	--> adding user to group
+
+usermod -L username					--> log the user
+
+usermod -U username					--> login to the user when fail even having the username and password
+
+id username							--> user details such as his primary and secondary group
+
+lid -g groupname					--> to know how many users are there at a particular group
+
+groups username						--> to see user belongs to which groups
+	
+usermod -aG <group1>,<group2> <username>	--> to add multiple goups to the user
+
+su - username			--> switch the user
+
+vi /etc/sudoers
+
+visudo
+
+userdel -r username		--> delete the user
+
+groupdel groupname		--> delete the group
+
+
+
+Automating/Scheduling tasks commands:
+------------------------------------
+
+#cron: It is a daemon that executes scheduled commands. cron also /reads /etc/crontab.
+
+#crontab: crontab is the program used to install, deinstall or list the tables  used to drive the cron daemon in Vixie cron.
+
+service crond.service status		--> cron status
+
+>	--> redirect standard output
+
+>> 	--> append the standard output
+
+
+
+crontab format:
+--------------
+minute			--> [0-59]
+
+hour			--> [0-23]
+
+month			--> [1-31]
+
+day of month 	--> [1-12, Jan,Feb]
+
+day of week		--> [1-6, Sun,Mon, 0=7]
+
+command/script	--> path of the file
+
+
+*/1 * * * * /home/ec2-user/hello.sh > /home/ec2-user/cron.log 2>&1		--> redirect standard output
+
+*/1 * * * * /home/ec2-user/hello.sh >> /home/ec2-user/cron.log 2>&1		--> append the standard output
+
+
+
+File descriptors:
+----------------
+0	--> standard input
+
+1	--> standard output
+
+2	--> standard error
+
+
+*/1 * * * * /home/ec2-user/hello.sh > /home/ec2-user/cron.log 2>&1
+
+crontab -l	--> list all the jobs in crontab of the particular user
+
+crontab -e	--> edit the cron job			#give */1 * * * * /home/ec2-user/hello.sh > /home/ec2-user/cron.log 2>&1
+
+crontab -r	--> without confirmation delete/remove the cron job
+
+crontab -ir	--> delete/remove the cron job
+
+sudo touch /etc/cron.allow		--> to restrict the particular user
+
+sudo vi /etc/cron.allow			--> to give permission for a particular user;	#give inside the user ec2-user
+
+sudo crontab -l -u username		--> to see the cron jobs at a particular user
+
+
+
+Remote access commands:
+----------------------
+
+ssh -i "pemfilename" username@IP/hostname		--> connect to the server
+
+ssh username@IP/hostname						--> connect to the server with #username; password; IP or hostname;
+
+scp [secure copy]								--> copy files from one server to another server
+
+server-1
+
+ssh <filename devops.txt> username@server2IP/hostname					
+--> copy the files from server-1 to server-2
+
+ssh -r <path of the dir or dir DevOps> username@server2IP/hostname		--> copy the directory from server-1 to server-2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

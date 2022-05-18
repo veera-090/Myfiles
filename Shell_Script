@@ -1,0 +1,185 @@
+														shell script:
+														============
+														
+#! bin/bash
+
+echo "......."
+To write and Quit:		:wq
+To Save:				:w
+Executing the File:		chmod +x <File name.extension>			ie. chmod +x hello-world.bash				./hello-world.bash		
+									or
+						chmod 755 <File name.extension>			ie. chmod +x hello-world.bash				bash  hello-world.bash
+						
+
+
+# Read user input:
+-----------------
+read name
+
+echo " Enter your name: $name"
+
+
+
+# arguments:
+-----------
+# total arguments and their values:
+
+echo "Total arguments :" $#
+
+echo "all arguments values :" $@
+
+
+# arguments can be accessed as:
+
+echo "first :" $1
+
+echo "second :" $2
+
+
+# operators:
+-----------
+-eq			--> equal to  
+
+-gt			--> greaterthan
+	
+-lt			--> lessthan
+
+-a or &		--> and 
+
+-o or ||	--> or 
+
+
+# file operators:
+
+-f		--> file exist
+
+-d 		--> dir exist or not
+
+-s 		--> file Non empty file
+
+-d 		--> dir Is Directory exist and not a file
+
+-w 		--> file Is writable file
+
+-r 		--> file Is read-only file
+
+-x 		--> file Is file is executable
+
+
+# arithematic operators:
+
+echo "addition :" $(( $num1 + $num2 ))
+
+echo "subtraction :" $(( $num1 - $num2 ))
+
+echo "subtraction :" $(( $num1 * $num2 ))
+
+echo "subtraction :" $(( $num1 / $num2 ))
+
+#floating point:
+
+echo "scale=2;$num1+$num2" | bc
+
+
+
+
+
+*****************************************************
+
+# if else - elif:
+----------------
+
+echo " value of a :"
+
+echo " value of b :"
+
+echo " value of c :"
+
+echo " value of d :"
+
+if [ $a > $b -a $a > $c -a ]; then
+echo " a value is big"
+
+elif [ $b > $c and $b > $d ]; then
+echo " b value is big"
+
+elif [ $c > $d and $c > $d ]; then
+echo " c value is big"
+
+else
+echo " d value is big"
+
+fi
+
+
+*******************************************************************
+
+
+# loops:
+-------
+
+# for loop:
+
+#syntax:
+
+#!/bin/bash
+
+for variable in values; do
+
+condition;
+
+done
+
+
+# example:
+
+for i in 1 2 3 4 5; do
+
+echo " number $i"
+
+done
+
+
+for i in {1..10}; do
+
+echo " number $i"
+
+done
+
+
+for i in {1..10..2}; do
+
+echo " number $i"
+
+done
+
+
+for ((i=o; i<10; i++)); do
+
+echo "number $i"
+
+done
+
+
+
+du -h filename		--> see size of the file
+
+
+#!/bin/bash
+value=0
+
+for i in /root/scripts/*.pdf; do
+
+size=$(du -h "$i" | awk '{print $1}')
+
+if [ $size == $value ]; then
+echo "Files of 0kb is : $i"
+mv -f $i /root/test
+fi
+done
+
+
+
+
+
+
