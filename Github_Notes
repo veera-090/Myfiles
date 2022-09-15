@@ -11,10 +11,10 @@ organization URL:	https://github.com/LearnNgain-github
 2. create new repository:
 
 walmart-project URL:	https://github.com/LearnNgain-github/wallmart.git	--> https
-						git@github.com:LearnNgain-github/wallmart.git		--> ssh
+			git@github.com:LearnNgain-github/wallmart.git		--> ssh
 						
-amazon-project URL:		https://github.com/LearnNgain-github/amazon.git		--> https
-						git@github.com:LearnNgain-github/amazon.git			--> ssh
+amazon-project URL:	https://github.com/LearnNgain-github/amazon.git		--> https
+			git@github.com:LearnNgain-github/amazon.git		--> ssh
 						
 						
 3. create new team:
@@ -24,8 +24,7 @@ walmart-devteam URL:	https://github.com/orgs/LearnNgain-github/teams/walmart-dev
 
 4. Add the Developers to the team:
 
-5. Provide Repo access to the Developers:
-
+5. Provide Repo access to the team:
 
 
 
