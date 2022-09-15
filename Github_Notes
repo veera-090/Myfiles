@@ -19,7 +19,7 @@ amazon-project URL:	https://github.com/LearnNgain-github/amazon.git		--> https
 						
 3. create new team:
 
-walmart-devteam URL:	https://github.com/orgs/LearnNgain-github/teams/walmart-devteam		--https
+walmart-devteam URL:	https://github.com/orgs/LearnNgain-github/teams/walmart-devteam 	--https
 
 
 4. Add the Developers to the team:
@@ -31,16 +31,14 @@ walmart-devteam URL:	https://github.com/orgs/LearnNgain-github/teams/walmart-dev
 *********************************************************************************************
 
 #######Note:
- 
+
 - +-+without commit to any created new file at working area switched to another branch will gives error i.e that file shows at all the branches
 
-- merge conflicts happen when writing same files at same line	[git merge]
+- merge conflicts happen when writing same files at same line			[git merge]
 
 - how to get particular branch particular commit id folders/files only 		[git cherry-pick <commit ID>]
 
-- how to verify the ssh configuration is working or not?					[ ssh -T git@github.com ] or [ ssh -T git@mss.ghe.com ]
-
-
+- how to verify the ssh configuration is working or not?			[ ssh -T git@github.com ] or [ ssh -T git@mss.ghe.com ]
 
 
 
@@ -54,13 +52,13 @@ git init
 .git
 
 
+Logical areas:
+-------------
 
-Untracked files
-working area	********		staging area	*******************************		local repository	*************************************	 remote repository		
-				<git add .>						<git commit -m "commit message">						<git push <alias /github URL> master>
-working area	********		staging area	*******************************		local repository	*************************************	 remote repository
-
-
+Untracked files				tracked files
+working area	********		staging area	***********************		local repository	*********************	 remote repository		
+				<git add .>					<git commit -m "commit message">		<git push <alias /github URL> master>
+working area	********		staging area	***********************		local repository	*********************	 remote repository
 
 
 
@@ -69,13 +67,20 @@ git status
 git add <./ * / filename/ directory name>
 
 
+####Note:
+--------
+- empty directories are not allow going to add or commit.
+
+
+configure username & token/password:
+-----------------------------------
 git config --global --list
 git config --global user.name "username"
 git config --global user.email "usermail"
 
 
 
-git commit -m "<commit message>"
+git commit -m "<commit message>"		--> -m is "message"
 
 git commit -a -m "<commit message>"		===> whenever the file is modified
 
