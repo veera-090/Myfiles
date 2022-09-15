@@ -56,7 +56,7 @@ Logical areas:
 -------------
 
 Untracked files				tracked files
-working area	********		staging area	***********************		local repository	*********************	 remote repository		
+working area	********		staging area	***********************		local repository	*********************	 remote repository			
 				<git add .>					<git commit -m "commit message">		<git push <alias /github URL> master>
 working area	********		staging area	***********************		local repository	*********************	 remote repository
 
@@ -80,17 +80,23 @@ git config --global user.email "usermail"
 
 
 
-git commit -m "<commit message>"		--> -m is "message"
+git commit -m "<commit message>"			--> -m is "message"
 
-git commit -a -m "<commit message>"		===> whenever the file is modified
+git commit -m "<commit message>" <file/dir name>		--> -m is "message" commit when we have file/dir
 
-git remote add <alias name/walmart> <github/ssh URL>
+git commit -a -m "<commit message>"				--> -a is "add" -m is "message"	--> whenever the file is modified
 
-git remote -v
+git remote add <alias name/walmart> <github/ssh URL>		--> map remote url to local repo url
 
-git remote remove <alias name>		===> to delete alias/mapped url
+git remote add walmart https://github.com/LearnNgain-github/wallmart.git
 
-git push <alias / walmart/ github URL> <branch name/ master>
+git remote -v							--> To check that remote url is mapped to local repo or not
+
+git remote remove <alias name>					--> to delete alias/mapped url
+
+git push <alias / walmart/ github URL> <branch name/ master>	--> push code from local repo url to remote repo url
+
+git push walmart https://github.com/LearnNgain-github/wallmart.git <branch name/master>
 
 
 
@@ -104,27 +110,40 @@ git-profile >> settings >> deleveper settings >> generate user access token
 
 
 
-git log
+git log				--> To see how many commit ID's are available
 
-git show b87654ad345df		===> display particular commit ID files
+git show b87654ad345df		--> Display particular commit ID files
 
-git log -2		===> list the only 2 commit id
+git log -2			--> list the latest only 2 commit ID's.
 
-git show --pretty="" --name-only 341a7fa66
+git show --pretty="" --name-only 341a7fa66	--> Display particular commit ID filename
 
-git clean -n	===> show what are the new files we want remove at working area
+git clean -n	--> show what are the new files we want remove at working area
 
-git clean -f 	===> remove only newly created files at "working area"
+git clean -f 	--> remove only newly created files at "working area"
 
-git reset		===> get back the files/folders from "staging area --> working area"
+git reset	--> get back the files/folders from "staging area --> working area"
 
-git reset <file/dir name>	===> get back particular files/folders from "staging area --> working area"
+git reset <file/dir name>	--> get back particular files/folders from "staging area --> working area"
 
-git revert <latest commit ID>	===> git back new files/dir from "remote repository --> local repository" & delete newly add files/dir at "local repository".
+git revert <latest commit ID>	--> git back new files/dir from "remote repository --> local repository" & delete newly add files/dir at "local repository".
 
 git push <alias name/github url> <branch name> -f	
 
 .git ignore
+
+
+
+###Note:
+-------
+Q what is HEAD in git log?
+- HEAD --> master HEAD is a poinetr. It is going to point current branch and latest commit ID.
+
+Q What information will git log command display?
+- It will display Author name/ usermail ID, Timestamp, commit ID, commit message.
+
+Q How to know, In a particular commit ID. what are all the files are commited or how many files are commited?
+- git show b87654ad345df/<commit ID>
 
 
 
