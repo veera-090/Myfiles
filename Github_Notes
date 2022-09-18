@@ -32,9 +32,9 @@ walmart-devteam URL:	https://github.com/orgs/LearnNgain-github/teams/walmart-dev
 
 #######Note:
 
-- +-+without commit to any created new file at working area switched to another branch will gives error i.e that file shows at all the branches
+- +-+without commit to any created new file at working area switched. If we switch to another branch. Then we will get error i.e that file shows at all the branches
 
-- merge conflicts happen when writing same files at same line			[git merge]
+- merge conflicts happen when we integrate/ merge the same files & same line of code between two branches	[git merge]
 
 - how to get particular branch particular commit id folders/files only 		[git cherry-pick <commit ID>]
 
@@ -86,7 +86,7 @@ git commit -m "<commit message>" <file/dir name>		--> -m is "message" commit whe
 
 git commit -a -m "<commit message>"				--> -a is "add" -m is "message"	--> whenever the file is modified
 
-git remote add <alias name/walmart> <github/ssh URL>		--> map remote url to local repo url
+git remote add <alias name/walmart> <github/ssh URL>		--> mapping the remote url to local repo url
 
 git remote add walmart https://github.com/LearnNgain-github/wallmart.git
 
@@ -100,12 +100,12 @@ git push walmart https://github.com/LearnNgain-github/wallmart.git <branch name/
 
 
 
-git credentials:
+github credentials:
 ---------------
 usename/mail:
 password/access token:
 
-git-profile >> settings >> deleveper settings >> generate user access token
+github-profile >> settings >> deleveper settings >> generate user access token
 
 
 
@@ -128,7 +128,7 @@ git reset <file/dir name>	--> get back particular files/folders from "staging ar
 
 git revert <latest commit ID>	--> git back new files/dir from "remote repository --> local repository" & delete newly add files/dir at "local repository".
 
-git push <alias name/github url> <branch name> -f	
+git push <alias name/github url> <branch name> -f	--> push code from local repo url to remote repo url
 
 .git ignore
 
@@ -145,65 +145,77 @@ Q What information will git log command display?
 Q How to know, In a particular commit ID. what are all the files are commited or how many files are commited?
 - git show b87654ad345df/<commit ID>
 
+Q How to push code from one repo to another repo in remote?
+- By importing the code
 
 
 
 ******Branch:*********
 
-git branch			==> to see branches
+git branch			--> To see how many branches are there in local repo
 
-git branch -r		===> to see remote branches
+git branch -r			--> To see how many branches in remote repo
 
-git branch -a 		===> to see local branches
+git branch -a 			--> To see all branches
 
-git branch <branchname>		===> create branch
+git branch <branchname>		--> create branch
 
-git checkout <branchname>	===> switch branch
+git checkout <branchname>	--> switch branch
 
-git branch -d <branchname>		===> delete the branch at local repository
-
-
-
-##Note: without commit to any created new file at working area switched to another branch will gives error i.e that file shows at all the branches
+git branch -d <branchname>	--> delete the branch at local repository
 
 
 
-git diff <another branchname>	===> to see the differnces b/w the branches
+###Note:
+-------
+- without commit to any created new file at working area. If we switched to another branch. Then we will get error.	i.e that file shows at all the branches
 
-git merge <branchname>			===> merge the branches
+- merge conflicts happen when we integrate/ merge the same files & same line of code between two branches	[git merge branchname]
 
-git checkout -b <branchname>	===> create branch and switch to that branch
 
-git checkout -b <feature branch> <dev branch>	===> at present master branch, switch & create the feature branch, from dev branch. but not from master 
 
+
+git diff <another branchname>	--> To see the differnces b/w the branches
+
+git merge <branchname>		--> merge the branches
+
+git checkout -b <branchname>	--> create branch and switch to that branch
+
+git checkout -b <feature branch> <dev branch>	--> at present master branch, switch & create the feature branch, from dev branch. but not from master 
 
 
 
 ****** push: *******
 
-git push <alias name> <branchname1> <branchname2>	===> push some specific branches to remote repository from local repository
+git push <alias name> <branchname1> <branchname2>	--> push some specific branches to remote repo from local repo
 
-git push <alias name> --all 			===> push all branches to remote repository from local repository
+git push <alias name> --all 				--> push all branches to remote repository from local repository
 
-git branch -d <branchname>		===> delete the branch at local repository
+git branch -d <branchname>				--> delete the branch at local repository
 
-git push <alias> :<branchname>	===> delete the branch at remote repository
+git push <alias> :<branchname>				--> delete the branch at remote repository from local repository
 
 
 
 
 ******** Tag: *********
 
-git tag
+git tag					--> Display all the tags
 
-git tag <tag name>				===> create tag
+git tag <tag name>			--> create tag
 
-git tag -d <tag name>			===> delete the tag at local repository
+git tag -d <tag name>			--> delete the tag at local repository
 
-git push <alias> tag <tag name>
+git push <alias name> tag <tag name>	--> push tags to remote repository from local repository
 
-git push <alias> --tags
+git push <alias> --tags			--> push all the tags to remote repository from local repository
 
+
+###Note:
+-------
+- Tags are immutable and are create at master/main during production releases.
+
+- Tag can only delete in local repo only. But, can't delete in remote repo.
 
 
 
@@ -211,25 +223,23 @@ git push <alias> --tags
 
 git stash
 
-git stash list			===> see all the stashes
+git stash list			--> see all the stashes [List all the stashes]
 
-git stash apply			===> to get back recent one from stash
+git stash apply			--> To get back recent/latest one from stash
 
-git stash apply stash@{1}	===> to get back particular one from stash
+git stash apply stash@{1}	--> To get back particular one from stash
 
-git stash drop			===> to delete stash recent one
+git stash drop			--> To delete stash recent/latest one
 
-git stash drop stash@{1}	===> to delete particular one at stash
+git stash drop stash@{1}	--> To delete particular one at stash
 
-git stash pop			===> to get back recent one & delete at stash 
-
-
+git stash pop			--> To get back recent one & delete at stash 
 
 
 
 ********* cherry_pick: *********
 
-- how to get particular branch particular commit id folders/files only 		
+- how to integrate a particular branch particular commit ID folders/files to another branch. 		
 
 git cherry-pick <commit ID>
 
@@ -245,7 +255,7 @@ git cherry-pick <commit ID>
 
 ********* Clone: **********
 
-git clone URL	===> to get the entire work flow at initial stage of new project 
+git clone URL	--> To get the entire work flow at initial stage of new project 
 
 
 
@@ -270,30 +280,42 @@ working area
 
 git pull = git fetch + git merge <branchname>
 
-git fetch <alias> <branchname>
+git fetch <alias name> <branchname>	--> To get the code from "remote repo" to "local repo".
 
-git merge <alias/branchname>
+git merge <branchname>			--> To get the code from "local repo" to "working area"
 
-git pull <alias> <branchname>
+git pull <alias name> <branchname>	--> T get the code from "remote repo to "local repo" & "wroking area".
 
 
 
 
 ******* SSH Keys: ***********
+- To make passwordless authentication we use SSH Keys.
 
-ssh-keygen
+ssh-keygen	--> To generate SSH Keys.
 
-~/.ssh
+~/.ssh/		--> Keys are stored in user home directory
 
-id_rsa		==> private
 
-id_rsa.pub	==> public
+Type of keys:
+------------
+id_rsa		--> Private Key
+
+id_rsa.pub	--> Public Key
+
+
+
+Types of encryption algorithm:
+-----------------------------
+rsa algorithm
+
+dsa algorithm
 
 
 
 dsa:
 ---
-ssh-keygen -t dsa
+ssh-keygen -t dsa	--> how to generate dsa encryption algorithm using SSH Keys.	-t is "Type of encryption algorithm".
 
 id_dsa
 
@@ -303,29 +325,69 @@ id_dsa.pub
 
 ********** Files at ~/.ssh: ************
 
-~/.ssh/known_hosts	===> It saves all the host details when connecting to other systems at first time
+ls -la ~/.ssh		--> To see the SSH Keys
 
-~/.ssh/config		===> timout 
+~/.ssh/known_hosts	--> It saves all the host details when connecting to other systems at first time
+
+~/.ssh/config		--> To make connection timout 
 Host *
 	ServerAliveInterval 30
 	ServerAliveCountMax 2
 	
+------------------------------------------------------------------
+Q What are the files available in ~/.ssh ?
+- config
+- id_rsa
+- id_rsa.pub
+- known_hosts
 
-ssh -T git@github.com		==> how to verify the ssh configuration is working or not?
+config --> It is used for to make connection timeout.
+id_rsa		--> It is a Private Key
+id_rsa.pub	--> It is a Public Key
+known_hostS	--> This file contains all the hosts server details are registered whenever we connect to the server at the first time 
+
+
+
+Q How to register the id_rsa.pub (Public Key) in remote repository?
+
+-github profile --> settings --> SSh and GPG keys --> add at SSH Keys
+
+---------------------------------------------------------------------
+
+ssh -T git@github.com		--> how to verify that the SSH Keys configuration is working fine or not?
 
 https://mss.ghe.come
 
-ssh -T git@mss.ghe.com		==> at real time
+ssh -T git@mss.ghe.com		--> at real time
 
-git remote add <alias name/walmart> <github/ssh URL>		==> mapping the ssh URL
+ssh-copy-id username@hostname/IP address	--> It is used to copy SSH Keys from one Linux server to another Linux server
+
+password
+
+ssh username@hostname/IP address
+
+git remote add <alias name/walmart> <github/ssh URL>		--> mapping the ssh URL
+
+git remote remove <alias name>					--> to delete alias/mapped url
+
 
 
 
 *********** Personal Access Token: ***********
 
-#How we can use Github API?		--> 
+- when we can use Personal Access Token		--> its for passworless
 
-- when we can use Personal Access Token		==> its for passworless
+
+Q Where we can create these Personal Access Token?
+
+- github-profile >> settings >> deleveper settings >> generate user access token >> create new Token
+- usename/mail:
+- password/access token:
+
+
+Q How we can use Github API?		--> 
+
+
 
 
 
