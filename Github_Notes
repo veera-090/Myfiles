@@ -258,7 +258,7 @@ git cherry-pick <commit ID>
 git clone URL	--> To get the entire work flow at initial stage of new project 
 
 Q. How to give access to others ?
-Goto particular repository  >> setting  >> Manage access  >> give the password
+Goto particular repository  >> setting  >> Manage access  >> give the password >> Click on Invite the Team/ People >> give Team/ UserName >> click OK
 
 
 
