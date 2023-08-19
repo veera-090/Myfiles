@@ -42,7 +42,7 @@ Q. what is the working directory of docker ?	--> /var/lib/docker
 
 docker images:
 -------------
-docker images  or [docker image ls]                  											--> To see all the docker images
+docker images  or [docker image ls]                  				--> To see all the docker images
 
 docker build -t <registry>/<repository>:<tagname> <DockerBuildContext>		--> create docker images 
 
@@ -58,7 +58,7 @@ docker build -t <ecrRegistryURL>/<maven-web-app>:<1> .
 
 
 
-docker history <imageName/ID>										                      		--> To see the image layers
+docker history <imageName/ID>							--> To see the image layers
 
 docker inspect <imageName/ID> or [docker image inspect <imageName/ID>]		--> To inspect/view more details the docker image
 
@@ -71,7 +71,7 @@ docker login
 
 docker login -u <username> -p <password> <registryURL>			--> To login to cloud/remote
 
-docker push <registry>/<repository>:<tagname>								--> To push docker images to cloud/remote
+docker push <registry>/<repository>:<tagname>				--> To push docker images to cloud/remote
 
 docker push <imageName>
 
@@ -84,7 +84,7 @@ docker login
 
 docker login -u <username> -p <password> <registryURL>			--> To login to cloud/remote
 
-docker pull <registry>/<repository>:<tagname>								--> To push docker images to cloud/remote
+docker pull <registry>/<repository>:<tagname>				--> To push docker images to cloud/remote
 
 docker pull <imageName>
 
@@ -95,9 +95,9 @@ docker container:
 ----------------
 docker ps  or [docker container ls]																			                      --> To list the containers
 
-docker create -d --name <containerName> -p <HostPORT>:<containerPORT> <imageName>							--> To create container
+docker create -d --name <containerName> -p <HostPORT>:<containerPORT> <imageName>				--> To create container
 
-docker run -d --name <containerName> -p <HostPORT>:<containerPORT> <imageName>								--> To create & run container
+docker run -d --name <containerName> -p <HostPORT>:<containerPORT> <imageName>					--> To create & run container
 
 docker run -d --name <containerName> -p <HostPORT>:<containerPORT> <registry>/<repository>:<tagname>	
 
