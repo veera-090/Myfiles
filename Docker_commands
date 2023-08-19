@@ -19,21 +19,21 @@ docker Ad-hoc commands:
 ----------------------
 docker -version		--> To check the version
 
-docker info			  --> To know more information about docker
+docker info		--> To know more information about docker
 
-docker --help		  --> help 
+docker --help		--> help 
 
 
 
 
 **Note:
 -------
-Q. why we are using container ? 	--> for isolation purpose
+Q. why we are using container ? 		--> for isolation purpose
 
 Q. what is the working directory of docker ?	--> /var/lib/docker
 
 
-<registry>/<repository>:<tagname>	--> imageName
+<registry>/<repository>:<tagname>		--> imageName
 
 
 
