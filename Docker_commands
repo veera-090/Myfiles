@@ -1,0 +1,115 @@
+Docker commands:
+===============
+
+docker installation:
+-------------------
+
+ubuntu@ip-10-50-2-15:~$ sudo apt  install docker.io
+
+systemctl status docker
+
+sudo usermod -aG docker <username/ubuntu>		--> If we want to run docker commands on the user
+
+https://get.docker.com
+
+
+
+
+docker Ad-hoc commands:
+----------------------
+docker -version		--> To check the version
+
+docker info			  --> To know more information about docker
+
+docker --help		  --> help 
+
+
+
+
+**Note:
+-------
+Q. why we are using container ? 	--> for isolation purpose
+
+Q. what is the working directory of docker ?	--> /var/lib/docker
+
+
+<registry>/<repository>:<tagname>	--> imageName
+
+
+
+
+
+
+docker images:
+-------------
+docker images  or [docker image ls]                  											--> To see all the docker images
+
+docker build -t <registry>/<repository>:<tagname> <DockerBuildContext>		--> create docker images 
+
+docker build -t <NexusServerIP/Hostname:PORT>/<maven-web-app>:<1> .			
+
+docker build -t <ecrRegistryURL>/<maven-web-app>:<1> .
+
+	-t is tag. we are going to tag image with repository(Pubilc/Private)
+	
+
+
+
+
+
+
+docker history <imageName/ID>										                      		--> To see the image layers
+
+docker inspect <imageName/ID> or [docker image inspect <imageName/ID>]		--> To inspect/view more details the docker image
+
+
+
+
+docker push:
+-----------
+docker login
+
+docker login -u <username> -p <password> <registryURL>			--> To login to cloud/remote
+
+docker push <registry>/<repository>:<tagname>								--> To push docker images to cloud/remote
+
+docker push <imageName>
+
+
+
+
+docker pull:
+-----------
+docker login
+
+docker login -u <username> -p <password> <registryURL>			--> To login to cloud/remote
+
+docker pull <registry>/<repository>:<tagname>								--> To push docker images to cloud/remote
+
+docker pull <imageName>
+
+
+
+
+docker container:
+----------------
+docker ps  or [docker container ls]																			                      --> To list the containers
+
+docker create -d --name <containerName> -p <HostPORT>:<containerPORT> <imageName>							--> To create container
+
+docker run -d --name <containerName> -p <HostPORT>:<containerPORT> <imageName>								--> To create & run container
+
+docker run -d --name <containerName> -p <HostPORT>:<containerPORT> <registry>/<repository>:<tagname>	
+
+docker run -d --name mavenwebapp -p 9090:8080 maven-web-app:1
+	
+	-d is detached mode
+
+
+
+Note:
+----
+- containerName & HostPORT should be always unique for every container.
+
+- Two different containers run with same containerPORT's with unique containerName's
+ 
