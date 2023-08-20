@@ -15,6 +15,8 @@ https://get.docker.com
 
 
 
+
+
 docker Ad-hoc commands:
 ----------------------
 docker -version		--> To check the version
@@ -26,11 +28,42 @@ docker --help		--> help
 
 
 
+
+
 **Note:
 -------
 Q. why we are using container ? 		--> for isolation purpose
 
 Q. what is the working directory of docker ?	--> /var/lib/docker
+
+Q. what is dangling image? 
+	- An image without repository reference is called "dangling image". 
+
+Q. How to send the docker images from one server to another server without Registry ?	--> docker save & docker load commands
+	docker save <imageName/ID> -o <FileName>.tar
+	docker load -i <FileName>.tar
+	
+Q. what is difference between docker create & docker run command ?	
+
+Q. what is the difference docker stop & docker kill command ?
+
+Q. How can we troubleshoot the Application running as a container ?
+
+Q. Can we run more than one Process/(Application) in container ?		--> Technicall Yes, But, it's not good thing for the containers
+
+Q. If any changes do inside the container. Once remove/delete the container. will the changes is available ? 	--> No
+		
+Q. If any changes do inside the container. Once stop/restart the container. will the changes is available ?		--> Yes
+
+Q. what is difference between docker CP & COPY ?
+
+Q. what is docker commit ?
+
+	- we can create image out of container using docker commit. That will have all the changes whatever had done in container
+
+ 
+
+
 
 
 <registry>/<repository>:<tagname>		--> imageName
@@ -38,10 +71,8 @@ Q. what is the working directory of docker ?	--> /var/lib/docker
 
 
 
-
-
-docker images:
--------------
+create docker images:
+--------------------
 docker images  or [docker image ls]                  				--> To see all the docker images
 
 docker build -t <registry>/<repository>:<tagname> <DockerBuildContext>		--> create docker images 
@@ -51,16 +82,65 @@ docker build -t <NexusServerIP/Hostname:PORT>/<maven-web-app>:<1> .
 docker build -t <ecrRegistryURL>/<maven-web-app>:<1> .
 
 	-t is tag. we are going to tag image with repository(Pubilc/Private)
-	
 
 
 
 
 
 
+remove docker images:
+--------------------
+docker rmi <imageName/ID>					--> remove images. If the containers are stopped.
+
+docker rmi -f <imageName>					--> To untag the docker imageName is called [dangling image]. If there are any running containers.
+
+docker rmi -f <imageID>						--> Error, we can't delete. If there are any running containers.
+
+docker images -f dangling=true					--> To lis the dangling images
+
+docker rmi <imageName/ID> <imageName/ID> 			--> To remove multiple images
+
+docker images -q						--> To get all the docker imageID's
+
+docker rmi -f $(docker images -q)				--> It will remove all the images of the stopped containers. other wise It will give error.
+
+
+
+ 
+
+
+Other commands:
+--------------
 docker history <imageName/ID>							--> To see the image layers
 
-docker inspect <imageName/ID> or [docker image inspect <imageName/ID>]		--> To inspect/view more details the docker image
+docker inspect <imageName/ID> or [docker image inspect <imageName/ID>]		--> To inspect/view more details about the docker image
+
+docker inspect <containerID/Name>			-->  To inspect/view more details about the docker container
+
+docker search <images Names>				--> To search images in the repository
+
+docker rename <oldName> <newName>			--> To rename docker container 
+
+docker logs <containerID/Name>				--> To check the logs of the container
+
+docker logs -f <containerID/Name>			--> To check the floating logs of the container
+
+docker top <containerID/Name>				--> To check the process of the container
+
+docker stats <containerID/Name>				--> To check the CPU & Memory utilization of the container
+
+docker attach <containerID/Name>			--> It will attach container shell to the server shell & vice-versa
+
+docker cp <containerID/Name:/Filepath> <serverPath>		--> copy files from container to server
+
+docker cp <serverPath> <containerID/Name:/Filepath>		--> copy files from server to container
+
+docker commit <containerID/Name> <imageName> 			--> create the image out of container
+
+docker pause <containerID/Name>							--> stop the container
+
+docker unpause <containerID/Name>						--> start the container
+
 
 
 
@@ -78,6 +158,7 @@ docker push <imageName>
 
 
 
+
 docker pull:
 -----------
 docker login
@@ -91,19 +172,50 @@ docker pull <imageName>
 
 
 
-docker container:
-----------------
-docker ps  or [docker container ls]																			                      --> To list the containers
 
-docker create -d --name <containerName> -p <HostPORT>:<containerPORT> <imageName>				--> To create container
 
-docker run -d --name <containerName> -p <HostPORT>:<containerPORT> <imageName>					--> To create & run container
+create & run docker container:
+-----------------------
+docker ps  or [docker container ls]									--> To list all the running containers
+
+docker ps -a or [docker container ls -a] 								--> To list all the stopped & running containers
+
+docker create -d --name <containerName> -p <HostPORT>:<containerPORT> <imageName>			--> To create container
+
+docker run -d --name <containerName> -p <HostPORT>:<containerPORT> <imageName>				--> To create & run container
 
 docker run -d --name <containerName> -p <HostPORT>:<containerPORT> <registry>/<repository>:<tagname>	
 
 docker run -d --name mavenwebapp -p 9090:8080 maven-web-app:1
-	
+
 	-d is detached mode
+
+docker stop <containerID/Name>			--> To stop the container
+
+docker start <containerID/Name>			--> To start the container
+
+docker restart <containerID/Name>		--> To restart the container
+
+docker kill <containerID/Name>			--> To stop the container forcefully
+
+
+
+
+
+remove docker container:
+-----------------------
+docker rm <containerID/Name>			--> To remove container
+
+docker rm -f <containerID/Name>			--> Error, we can't delete. If there are any running containers.
+
+docker ps -aq					--> It will list all the containerID's
+
+docker rm -f $(docker ps -aq)			--> It will remove all the stopped containers
+
+docker container prune				--> It will remove all the stopped containers
+
+
+
 
 
 
@@ -112,4 +224,82 @@ Note:
 - containerName & HostPORT should be always unique for every container.
 
 - Two different containers run with same containerPORT's with unique containerName's
- 
+
+
+
+
+
+docker dangling & tag image:
+---------------------------
+docker rmi -f <imageName>				--> To untag the docker imageName is called [dangling image]. If there are any running containers.
+
+docker images -f dangling=true				--> To lis the dangling images
+
+docker tag <imageID> <imageName>			--> To give Tag name for the docker image
+
+
+
+
+
+additonal commands:
+------------------
+docker system prune					--> It will remove all stopped containers, all dangling images, all networks not used by atleast one container
+
+docker image prune					--> It will remove all the dangling images
+
+docker container prune					--> It will remove all the stopped containers
+
+docker volume prune					--> It will remove all local volumes not used by atleast one container
+
+docker network prune					--> It will remove all networks not used by atleast one container
+
+
+
+
+docker save & load:
+------------------
+docker save <imageName/ID> -o <FileName>.tar		--> To convert docker image to tarFile
+
+docker load -i <FileName>.tar				--> To convert tarFile to docker image
+
+
+
+
+
+Check list for Troublshooting the Application running as a container:
+--------------------------------------------------------------------
+1. Check the container is Up & Running or not ?	
+
+	docker ps -a 	or [docker container ls -a]
+	
+2. Check the container logs ?	whatever has been sent to STDOUT & STDERROR
+
+	docker logs <containerID/Name>
+
+3. Check, If the Process is running or not ?
+
+	docker top <containerID/Name>
+	
+4. Check the resources ? CPU & Memory Utilization of the container
+
+	docker stats <containerID/Name>
+	
+	Note:	- If the container is running out of CPU, then the Application performance will be very slow.
+			- If the container is running out of Memory, then the Application Process will be kill/down/stop.
+
+5. If required, Run commands on container ?
+
+	docker exec <containerID/Name> <command>
+	
+	docker exec mavenwebapp ls -la
+	
+	docker exec -it <containerID/Name> <command>		--> interactively execute the commands
+	
+	docker exec -it <containerID/Name> /bin/bash
+	
+	Note:	- If any changes do inside the container. Once remove/delete the container. will the changes is available ? 		--> No
+			
+			- If any changes do inside the container. Once stop/restart the container. will the changes is available ?	--> Yes
+
+
+
