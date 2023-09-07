@@ -241,7 +241,8 @@ git stash pop			--> To get back recent one & delete at stash
 
 ********* cherry_pick: *********
 
-- how to integrate a particular branch particular commit ID folders/files to another branch. 		
+Q. How to selectively pickup the commits from the child branch ?
+Q. How to integrate a particular branch particular commit ID folders/files to another branch ?
 
 git cherry-pick <commit ID>
 
@@ -433,10 +434,12 @@ git rebase -i HEAD~<commit order number>  ENTER --> change the commit order & SA
 git rebase -i HEAD~<commit order number>  ENTER --> give squash before commit order & SAVE("wq)		--> It is used to remove particular commit ID's
 
 
-
 Note:
 - we can't change the first commit order.
 - we can't remove the first commit
+
+
+
 
 
 
