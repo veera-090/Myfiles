@@ -138,6 +138,13 @@ git push <alias name/github url> <branch name> -f	--> push code from local repo 
 
 
 
+
+******roleback********
+
+git reset --hard <previous commit ID>	--> To roleback to previous version/commit ID. after committed or from local repo
+
+
+
 ###Note:
 -------
 Q what is HEAD in git log?
