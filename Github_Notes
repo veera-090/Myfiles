@@ -112,6 +112,8 @@ github-profile >> settings >> deleveper settings >> generate user access token
 
 git log				--> To see how many commit ID's are available
 
+git log --oneline		--> To see all the commit ID's in short form
+
 git show b87654ad345df		--> Display particular commit ID files
 
 git log -2			--> list the latest only 2 commit ID's.
@@ -414,12 +416,27 @@ maaster- mc1 -- mc2 -- dc1 -- dc2 -- dc3
 
 
 
-master> git rebase developer  
+developer> git rebase master  
 
 master> git merge developer
 
 
 
+Q. How to re-arrange the commit history ?
+
+commit order 			a --> b --> c --> d --> e
+re-arrange commit order		a --> d --> c --> b --> e
+
+
+git rebase -i HEAD~<commit order number>  ENTER --> change the commit order & SAVE(:wq)			--> It is used for re-arranging the commit ID's
+
+git rebase -i HEAD~<commit order number>  ENTER --> give squash before commit order & SAVE("wq)		--> It is used to remove particular commit ID's
+
+
+
+Note:
+- we can't change the first commit order.
+- we can't remove the first commit
 
 
 
