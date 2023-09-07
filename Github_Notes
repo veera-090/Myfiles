@@ -223,7 +223,9 @@ git push <alias> --tags			--> push all the tags to remote repository from local 
 
 ******** Stash: *********
 
-git stash
+git stash			--> To stash the staged files
+
+git stash -u			--> To stash stages files & untracked files
 
 git stash list			--> see all the stashes [List all the stashes]
 
