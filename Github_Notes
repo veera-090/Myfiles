@@ -86,6 +86,8 @@ git commit -m "<commit message>" <file/dir name>		--> -m is "message" commit whe
 
 git commit -a -m "<commit message>"				--> -a is "add" -m is "message"	--> whenever the file is modified
 
+git commit --amend -m "<commit message>"			--> "--amend" is used to commit whenever there is minor changes is available
+
 git remote add <alias name/walmart> <github/ssh URL>		--> mapping the remote url to local repo url
 
 git remote add walmart https://github.com/LearnNgain-github/wallmart.git
