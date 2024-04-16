@@ -55,7 +55,7 @@ git init
 Logical areas:
 -------------
 
-Untracked files				tracked files
+Untracked files				tracked/Indexed files
 working area	********		staging area	***********************		local repository	*********************	 remote repository			
 				<git add .>					<git commit -m "commit message">		<git push <alias /github URL> master>
 working area	********		staging area	***********************		local repository	*********************	 remote repository
